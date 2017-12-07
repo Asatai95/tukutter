@@ -1,21 +1,13 @@
 import MySQLdb
+import time
 from flask import Flask, request, render_template, redirect, make_response
 
 application = Flask(__name__)
 
-@application.route('/top')
+@application.route('/')
 def top():
 
     return render_template('top.html')
-
-# @application.route('/login')
-# def cookie():
-#
-#     resp = make_response('cookie set')
-#     resp.set_cookie('log_id', 'passwd')
-#
-#     print('resp')
-
 
 @application.route('/login')
 def login():
@@ -25,35 +17,36 @@ def login():
 @application.route('/login', methods=['POST'])
 def login_db():
 
-    log_id = request.form['log_id']
-    passwd = request.form['passwd']
-    print(log_id)
-    print(passwd)
+    log = request.form['log_id']
+    pas = request.form['passwd']
+
 
     db = MySQLdb.connect( user='root', passwd='asatai95',
         host='localhost', db='tukutter', charset='utf8')
-    print('???')
 
     con = db.cursor()
-    print(con)
 
-    sql = "select log_id, passwd from users where log_id = '" + log_id + "' and passwd = '" + passwd + "'"
+    sql = "select log_id, passwd from users where log_id = '" + log + "' and passwd = '" + pas + "'"
     con.execute(sql)
-    result = con.fetchall()
-    print(result)
-    print(sql)
 
-    if len(log_id) and len(passwd) is 0:
+    result = con.fetchall()
+
+    if len(result) is 1:
 
         print('top.html')
 
-        return render_template('top.html')
+        resp = make_response(render_template('top.html'))
+        resp.set_cookie(log, pas)
+        print(resp)
+
+        return resp
 
     else:
         print('login.html')
         return redirect('http://localhost:8080/login')
 
     print(result)
+
 
 @application.route('/logout')
 def logout():
@@ -90,3 +83,28 @@ def new_db():
 
     print('http://localhost:8080/top')
     return redirect('http://localhost:8080/top')
+
+@application.route('/tweet')
+def tweet():
+
+    return render_template('tweet.html')
+
+@application.route('/tweet', methods=['POST'])
+def tweet_db():
+
+    test = request.form['tweet']
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+
+    sql = 'insert into tweet(user_id, tweet_comment, created_at) value (1, %s, %s)'
+    con.execute(sql, [test, time_stamp])
+    db.commit()
+    print(sql)
+
+
+    db.close()
+    con.close()
+
+    return render_template('tweet.html')
