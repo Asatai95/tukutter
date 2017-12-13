@@ -5,9 +5,25 @@ from flask import Flask, request, render_template, redirect, make_response
 application = Flask(__name__)
 
 @application.route('/')
-def top():
+def top_db():
 
-    return render_template('top.html')
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select created_at, tweet_comment, user_name from tweet inner join users on tweet.user_id = users.id where log_id != '" + data + "' "
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return render_template('top.html', rows=result)
+
 
 @application.route('/login')
 def login():
@@ -36,7 +52,7 @@ def login_db():
         print('top.html')
 
         resp = make_response(render_template('top.html'))
-        resp.set_cookie(log, pas)
+        resp.set_cookie('name' , log)
         print(resp)
 
         return resp
@@ -52,6 +68,7 @@ def login_db():
 def logout():
 
     return redirect('https://localhost:8080/login')
+
 
 @application.route('/new')
 def new():
@@ -81,8 +98,8 @@ def new_db():
     db.close()
     con.close()
 
-    print('http://localhost:8080/top')
-    return redirect('http://localhost:8080/top')
+    print('http://localhost:8080/')
+    return redirect('http://localhost:8080/')
 
 @application.route('/tweet')
 def tweet():
@@ -95,10 +112,14 @@ def tweet_db():
     test = request.form['tweet']
     time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
 
+    if len(test) is 0:
+
+        return render_template('tweet.html', test='文字を入力して下さい')
+
     db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
     con = db.cursor()
 
-    sql = 'insert into tweet(user_id, tweet_comment, created_at) value (1, %s, %s)'
+    sql = 'insert into tweet(user_id, tweet_comment, created_at) values(1 ,%s, %s)'
     con.execute(sql, [test, time_stamp])
     db.commit()
     print(sql)
@@ -108,3 +129,96 @@ def tweet_db():
     con.close()
 
     return render_template('tweet.html')
+
+@application.route('/view')
+def search():
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select tweet_comment, created_at, user_name from tweet inner join users on tweet.user_id = users.id"
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return render_template('search.html', rows=result)
+
+@application.route('/search', methods=['POST'])
+def search_db():
+
+    search = request.form["search"]
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select tweet_comment, created_at, user_name from tweet inner join users on tweet.user_id = users.id where tweet_comment like '" '%' + search + '%' "' "
+    con.execute(sql)
+    db.commit()
+
+    result = con.fetchall()
+    print(result)
+
+    if result == ():
+
+        return render_template('search.html', test='該当なし')
+
+
+    return render_template('search.html', rows=result)
+
+
+
+
+# @application.route('/pro')
+# def profile():
+#
+#     return render_template('pro.html')
+
+@application.route('/pro')
+def profile_db():
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select created_at, tweet_comment, user_name from tweet inner join users on tweet.user_id = users.id where log_id = '" + data + "'"
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return render_template('pro.html', rows=result)
+
+
+@application.route('/oki')
+def oki():
+
+    return render_template('oki.html')
+
+@application.route('/top', methods=['POST'])
+def oki_db():
+
+    oki = request.form['oki']
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "insert into fab(tweet_id,user_id) values(1,1)"
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return render_template('pro.html', rows=result)

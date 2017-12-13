@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media='screen' href="static/css/tweet.css">
+
+  <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/tweet.css">
+  <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/tweet.css">
+
+
+  <title>TOP画面</title>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="profile">
+      <a href="/pro"><img src="static/img/profile.png" alt="プロフィール"></a>
+      <p>taro</p>
+    </div>
+    <div class="nav">
+
+      <ul class="nl clearFix">
+        <li><a href="/">TOP</a></li>
+        <li><a href="/view">検索</a></li>
+        <li><a href="/tweet">つぶやく</a></li>
+        <li><a href="/oki">お気に入り</a></li>
+        <li><a href="/login">ログアウト</a></li>
+      </ul>
+  </header>
+
+  <hr>
+
+  <div class='tweet_box'>
+    <div class='tweet_comment'>
+
+      <form action="/tweet" method="POST">
+        <textarea cols="30" rows="5" maxlength="150" name="tweet" placeholder="150字以内で入力してください。" wrap="hard"></textarea>
+      <div class='erra'>{{test}}</div>
+      <div class='submit'>
+        <input type="submit" name="save" value="Tweet">
+      </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

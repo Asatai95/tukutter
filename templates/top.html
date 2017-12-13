@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media='screen' href="static/css/top.css">
+
+  <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/top.css">
+  <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/top.css">
+
+
+  <title>tukutter</title>
+
+</head>
+
+<body>
+  <header>
+    <div class="profile">
+      <a href="/pro"><img src="static/img/profile.png" alt="プロフィール"></a>
+      <p>taro</p>
+    </div>
+    <div class="nav">
+
+      <ul class="nl clearFix">
+        <li><a href="/">TOP</a></li>
+        <li><a href="/view">検索</a></li>
+        <li><a href="/tweet">つぶやく</a></li>
+        <li><a href="/oki">お気に入り</a></li>
+        <li><a href="/login">ログアウト</a></li>
+      </ul>
+  </header>
+
+  </div>
+  {% for row in rows %}
+  <div class="stream">
+
+    <div class="content">
+      <div class="stream-header">
+        <img src="static/img/profile.png" alt="">
+        <p>
+          <span class="user-name">{{row[2]}}</span>
+          <span class="tweet-time">{{row[0]}}</span>
+          <span class="follow">フォロー中</span>
+        </p>
+      </div>
+      <div class="inline">
+        <div class="stream-content">
+          <p>{{row[1]}}</p>
+        </div>
+        <div class="stream-footer">
+          <div class="favorite">
+           <form name='oki' method="POST">
+            <a href="/oki"><img src="static/img/logo-pic.png" alt=""></a>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+</body>
+
+</html>
