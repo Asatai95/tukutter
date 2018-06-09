@@ -7,7 +7,7 @@
 
 .profile img {
   position: absolute;
-  width: 6%;
+  width: 15%;
   margin: 1vw 1vw;
 }
 
@@ -99,53 +99,57 @@ div.nav ul.nl li a:hover {
   min-height: 1px;
 }
 
-dl.search_box{
-  width: 70%;
-	position: relative;
-	background-color:#fff;
-	border:1px solid #aaa;
-	-webkit-border-radius:6px;
-	-moz-border-radius:6px;
-	-o-border-radius:6px;
-	-ms-border-radius:6px;
-	border-radius:6px;
+.profilecard {
+  width: 38vw;
+  margin: 3vw auto;
+  padding: 1vw;
+  background-color: #EEEEEE;
+  border: solid 10px #f7b52c;
 }
 
-dl.search_box dt {
-	margin-right:40px;
-	padding:8px 0 8px 8px;
+.profile-header {
+  display: flex;
 }
 
-dl.search_box dt input {
-	width:100%;
-	height:24px;
-	line-height:24px;
-	background:none;
-	border:none;
+.profile-header p {
+  margin-left: 3vw;
+  font-size: 3vw;
+  padding-top: 10px;
 }
 
-dl.search_box dd {
-	position:absolute;
-	top:0;
-	right:0;
+.profile-header img {
+  width: 20%;
+  height: 20%;
+  margin: 2vw 2vw;
 }
 
-dl.search_box dd button {
-	display:block;
-	padding:10px;
-	background:none;
-	border:none;
+p span {
+  display: inline-block;
 }
 
-dl.search_box dd button span {
-	display:block;
-	width:20px;
-	height:20px;
-	background:url(../img/searches.png) no-repeat scroll 0 0;
+a img .edit {
+  margin-left: 1vw;
+  width: 2vw;
+  height: auto;
 }
 
-input[type="text"] {
-    font-size: 18px;
+a :hover {
+  filter: brightness(40%);
+}
+
+.profile-content {
+  margin: 1vw 0;
+}
+
+.profile-content p {
+  padding: 1vw;
+  line-height: 1.4;
+  text-align: center;
+  font-weight: 400;
+}
+
+.profilecard .fixed {
+  margin-top: 80px;
 }
 
 .stream {
@@ -164,14 +168,25 @@ input[type="text"] {
 
 .stream-header img {
   margin: 1vw 1vw;
-  width: 4vw;
-  height: 4vw;
+  width: 6vw;
+  height: 6vw;
+}
+
+p .tweet-time {
+  float: right;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 8px;
+}
+
+p .user-name {
+  margin-left: 3vw;
+  font-size: 3vw;
+  word-break: break-all
 }
 
 span {
   display: inline-block;
-  font-size: 2vw;
-  margin: 3vw 0 0 0.5vw;
 }
 
 span .tweet-time {
@@ -212,6 +227,53 @@ span .follow {
   margin-top: 65px;
 }
 
-.erra {
-  text-align: center;
+#top_scroll{
+    position: relative;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+}
+
+#page-top1{
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    bottom: -250px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    color: #222;
+    text-align: center;
+    text-decoration: none;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+#page-top1:hover{
+    background: ;
+    transform: translateY(-10px);
+}
+
+#top_scroll:hover{
+    background: #fff;
+}
+
+.square_btn {
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #4646ff;
+    border-bottom: solid 2px #1e1eff;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.square_btn:active {
+    border-bottom: solid 2px #4646ff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }

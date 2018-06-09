@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name='keywords' content=''>
     <meta name='description' content="">
-    <meta name='viewport' content="width=device-width, initial-scale=1,0">
+    <meta name='viewport' content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" media='screen' href="static/css/new.css">
 
     <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/new.css">
@@ -17,16 +17,25 @@
 <body>
 <div id="form">
     <p class="form-title">ユーザー登録画面</p>
-    <form action="/new" method="POST">
+    <form action="/new" method="POST" enctype="multipart/form-data">
+        <div class="error">{{error}}</div>
+        <div class='log_error'>{{log_error}}</div>
         <p>ログインID</p>
         <p class="username"><input type="text" name="log_id" maxlength="32" autocomplete="OFF" /></p>
         <p>パスワード</p>
         <p class="password"><input type="password" name="passwd" maxlength="32" autocomplete="OFF" /></p>
         <p>名前</p>
         <p class='user_name'><input type="text" name='user_name' maxlength="32" autocomplete="OFF" /></p>
-
-        <p class="submit"><input type="submit" value="登録" /></p>
+        <p>プロフィール画像</p>
+        <p class='profile_img'><img src="static/img/profile.png" alt="プロフィール画像">
+        <input id="img_file" class="file" type="file" name="img_file" value="画像選択"></p>
+        <p class="submit">
+          <input type="submit" value="登録" />
+        </p>
     </form>
 </div>
+<p class="submit">
+  <a href="/login"><input type="submit" value="戻る" /></a>
+</p>
 </body>
 </html>

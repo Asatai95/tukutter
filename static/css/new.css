@@ -5,7 +5,7 @@ body {
 }
 
 p {
-  margin: 0;
+  margin: 5px 0;
 }
 
 form {
@@ -13,7 +13,7 @@ form {
 }
 
 input {
-  margin: 0;
+  margin: 0 10px;
 }
 
 #form{
@@ -54,6 +54,11 @@ input[type="password"] {
 
 .submit{
     text-align: center;
+    margin: 15px 0;
+}
+
+input .submit {
+  margin: 0 20px;
 }
 
 /* skin */
@@ -76,12 +81,12 @@ input[type="password"] {
 }
 
 .submit input {
-  background: #f78181;
-  background-image: -webkit-linear-gradient(top, #f78181, #f78181);
-  background-image: -moz-linear-gradient(top, #f78181, #f78181);
-  background-image: -ms-linear-gradient(top, #f78181, #f78181);
-  background-image: -o-linear-gradient(top, #f78181, #f78181);
-  background-image: linear-gradient(to bottom, #f78181, #f78181);
+  background: #0099FF;
+  background-image: -webkit-linear-gradient(top, #0099FF, #0099FF);
+  background-image: -moz-linear-gradient(top, #0099FF, #0099FF);
+  background-image: -ms-linear-gradient(top, #0099FF, #0099FF);
+  background-image: -o-linear-gradient(top, #0099FF, #0099FF);
+  background-image: linear-gradient(to bottom, #0099FF, #0099FF);
   -webkit-border-radius: 8;
   -moz-border-radius: 8;
   border-radius: 8px;
@@ -93,16 +98,24 @@ input[type="password"] {
   font-size: 16px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  cursor: pointer;
+  cursor: hand;
+  margin: 0 20px;
 }
 
 .submit input:hover {
-  background: #f5c7c7;
-  background-image: -webkit-linear-gradient(top, #f5c7c7, #f5c7c7);
-  background-image: -moz-linear-gradient(top, #f5c7c7, #f5c7c7);
-  background-image: -ms-linear-gradient(top, #f5c7c7, #f5c7c7);
-  background-image: -o-linear-gradient(top, #f5c7c7, #f5c7c7);
-  background-image: linear-gradient(to bottom, #f5c7c7, #f5c7c7);
+  background: #6699FF;
+  background-image: -webkit-linear-gradient(top, #6699FF, #6699FF);
+  background-image: -moz-linear-gradient(top, #6699FF, #6699FF);
+  background-image: -ms-linear-gradient(top, #6699FF, #6699FF);
+  background-image: -o-linear-gradient(top, #6699FF, #6699FF);
+  background-image: linear-gradient(to bottom, #6699FF, #6699FF);
   text-decoration: none;
+  cursor: pointer;
+  cursor: hand;
+  margin: 0 20px;
+
+  text-shadow: 2px 2px 2px black;
 }
 
 #form{
@@ -122,6 +135,35 @@ input[type="password"] {
   text-decoration: none;
 }
 
-.user_name {
+#form .error {
+  text-align: center;
+  color: red;
+  margin: 15px 0;
+  font-weight: 400;
+}
+
+#form .log_error {
+  text-align: center;
+  color: red;
+  margin: 15px 0;
+  font-weight: 400;
+  font-size: 19px;
+}
+
+#form .profile_img img {
+  width: 20%;
+  height: 20%;
+}
+
+#form .profile_img {
   margin-bottom: 30px;
+}
+
+.file {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.submit a {
+  float: right;
 }

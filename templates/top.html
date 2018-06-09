@@ -11,58 +11,68 @@
   <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/top.css">
   <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/top.css">
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/common.js"></script>
+
+
 
   <title>tukutter</title>
 
 </head>
 
 <body>
+  {% for top in tops %}
   <header>
     <div class="profile">
-      <a href="/pro"><img src="static/img/profile.png" alt="プロフィール"></a>
-      <p>taro</p>
+      <a href="/pro"><img src="{{top[1]}}" alt="プロフィール"></a>
+      <p>{{top[0]}}</p>
     </div>
+  {% endfor %}
     <div class="nav">
 
       <ul class="nl clearFix">
         <li><a href="/">TOP</a></li>
-        <li><a href="/view">検索</a></li>
+        <li><a href="/search">検索</a></li>
         <li><a href="/tweet">つぶやく</a></li>
         <li><a href="/oki">お気に入り</a></li>
-        <li><a href="/login">ログアウト</a></li>
+        <li><a href="/logout">ログアウト</a></li>
       </ul>
   </header>
 
   </div>
   {% for row in rows %}
   <div class="stream">
-
     <div class="content">
       <div class="stream-header">
-        <img src="static/img/profile.png" alt="">
+        <a href="/pro/{{row[5]}}"><img src="{{row[4]}}" alt=""></a>
         <p>
-          <span class="user-name">{{row[2]}}</span>
-          <span class="tweet-time">{{row[0]}}</span>
-          <span class="follow">フォロー中</span>
+          <span class="tweet-time">{{row[1]}}</span>
+          <span class="user-name">{{row[3]}}</span>
         </p>
+
       </div>
       <div class="inline">
         <div class="stream-content">
-          <p>{{row[1]}}</p>
-        </div>
-        <div class="stream-footer">
-          <div class="favorite">
-           <form name='oki' method="POST">
-            <a href="/oki"><img src="static/img/logo-pic.png" alt=""></a>
-          </form>
-          </div>
+          <p>{{row[2]}}</p>
+           <div class="stream-footer">
+             <div class="favorite" name='oki'>
+               <a href="/oki/{{row[0]}}"><img src="static/img/logo-pic.png" alt=""></a>
+               <a href="/follow/{{row[5]}}" class="square_btn">フォローする</a>
+             </div>
+
+           </div>
         </div>
       </div>
     </div>
+   </div>
+
+   <footer>
+       <div id="top_scroll">
+         <a href="#" id="page-top1"><img src="static/img/logo.png" alt="ページトップスクロール"></a>
+       </div>
+   </footer>
 
     {% endfor %}
-
-  </div>
 
 </body>
 

@@ -11,6 +11,8 @@
   <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/search.css">
   <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/search.css">
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/common.js"></script>
 
   <title>tukutter</title>
 
@@ -18,28 +20,35 @@
 
 <body>
   <header>
+    {% for view in views%}
     <div class="profile">
-      <a href="pro"><img src="static/img/profile.png" alt="プロフィール"></a>
-      <p>taro</p>
+      <a href="pro"><img src="{{view[1]}}" alt="プロフィール"></a>
+      <p>{{view[0]}}</p>
     </div>
+    {% endfor %}
     <div class="nav">
 
       <ul class="nl clearFix">
         <li><a href="/">TOP</a></li>
-        <li><a href="/search/view">検索</a></li>
+        <li><a href="/search">検索</a></li>
         <li><a href="/tweet">つぶやく</a></li>
         <li><a href="/oki">お気に入り</a></li>
-        <li><a href="/login">ログアウト</a></li>
+        <li><a href="/logout">ログアウト</a></li>
       </ul>
   </header>
-
+ <div class='content'>
   <form action="/search" name="search" method="POST">
     <dl class="search_box">
       <dt><input type="text" name="search"  placeholder="キーワード検索" /></dt>
       <dd><button><span></span></button></dd>
     </dl>
   </form>
+
+  </div>
+
   <div class='erra'>{{test}}</div>
+
+
 
   {% for myrow in rows %}
 
@@ -47,11 +56,10 @@
 
     <div class="content">
       <div class="stream-header">
-        <img src="static/img/profile.png" alt="">
+        <a href="/pro/{{myrow[4]}}"><img src="{{myrow[3]}}" alt=""></a>
         <p>
           <span class="user-name" name="name">{{myrow[2]}}</span>
           <span class="tweet-time" name="time">{{myrow[1]}}</span>
-          <span class="follow">フォロー中</span>
         </p>
       </div>
       <div class="inline">
@@ -62,11 +70,18 @@
         </div>
         <div class="stream-footer">
           <div class="favorite">
-            <a href="/oki"><img src="static/img/logo-pic.png" alt=""></a>
+            <a href="/oki/{{myrow[4]}}"><img src="static/img/logo-pic.png" alt=""></a>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <footer>
+      <div id="top_scroll">
+        <a href="#" id="page-top1"><img src="static/img/logo.png" alt="ページトップスクロール"></a>
+      </div>
+  </footer>
 
   {% endfor %}
 

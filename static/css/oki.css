@@ -1,0 +1,251 @@
+@charset "utf-8";
+
+header {
+  margin-bottom: 40px;
+}
+
+.profile {
+  display: inline-block;
+  width: 100%;
+}
+
+.profile img {
+  position: absolute;
+  width: 15%;
+  margin: 1vw 1vw;
+}
+
+.profile p {
+  font-size: 5vw;
+  text-align: center;
+}
+
+/* --- ナビゲーションバー --- */
+
+div.nav {
+  width: 100%;
+  /* ナビゲーションの幅 */
+  background: #f9f9f9 url(../img/off.gif) repeat-x top;
+  /* ナビゲーションの背景 */
+  border-top: 1px #cccccc solid;
+  /* 上境界線 */
+  border-bottom: 1px #cccccc solid;
+  /* 下境界線 */
+  font-size: 80%;
+}
+
+/* --- メニューエリア --- */
+
+div.nav ul.nl {
+  width: 600px;
+  /* メニューの幅 */
+  margin: 0 auto;
+  /* センターに配置 */
+  padding: 0;
+  background: #f9f9f9 url(../img/off.gif) repeat-x top;
+  /* メニューの背景 */
+  border-left: 1px #cccccc solid;
+  /* メニューの左境界線 */
+  border-right: 1px #ffffff solid;
+  /* メニューの右境界線 */
+  list-style-type: none;
+  text-align: center;
+}
+
+/* --- メニュー項目 --- */
+
+div.nav ul.nl li {
+  width: 20%;
+  /* 項目の幅 */
+  float: left;
+}
+
+/* --- リンク --- */
+
+div.nav ul.nl li a {
+  display: block;
+  position: relative;
+  /* IE6用 */
+  padding: 11px 2px;
+  /* リンクエリアのパディング（上下、左右） */
+  border-top: 1px #ffffff solid;
+  /* リンクエリアの上境界線 */
+  border-bottom: 1px #808080 solid;
+  /* リンクエリアの下境界線 */
+  border-left: 1px #ffffff solid;
+  /* リンクエリアの左境界線 */
+  border-right: 1px #cccccc solid;
+  /* リンクエリアの右境界線 */
+  text-decoration: none;
+  /* テキストの下線（なし） */
+}
+
+/* --- ポイント時の設定 --- */
+
+div.nav ul.nl li a:hover {
+  background: #f9f9f9 url(../img/on.gif) repeat-x top;
+  /* ポイント時の背景 */
+  text-decoration: underline;
+  /* テキストの下線（あり） */
+}
+
+/* --- clearfix --- */
+
+.clearFix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearFix {
+  min-height: 1px;
+}
+
+dl.search_box{
+  width: 70%;
+	position: relative;
+	background-color:#fff;
+	border:1px solid #aaa;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	-o-border-radius:6px;
+	-ms-border-radius:6px;
+	border-radius:6px;
+}
+
+dl.search_box dt {
+	margin-right:40px;
+	padding:8px 0 8px 8px;
+}
+
+dl.search_box dt input {
+	width:100%;
+	height:24px;
+	line-height:24px;
+	background:none;
+	border:none;
+}
+
+dl.search_box dd {
+	position:absolute;
+	top:0;
+	right:0;
+}
+
+dl.search_box dd button {
+	display:block;
+	padding:10px;
+	background:none;
+	border:none;
+}
+
+dl.search_box dd button span {
+	display:block;
+	width:20px;
+	height:20px;
+	background:url(../img/searches.png) no-repeat scroll 0 0;
+}
+
+input[type="text"] {
+    font-size: 18px;
+}
+
+.stream {
+  width: 38vw;
+  margin: 0 auto;
+}
+
+.content {
+  margin-top: 2vw;
+  background-color: #EEEEEE;
+}
+
+.stream-header {
+  display: flex;
+}
+
+.stream-header img {
+  margin: 2vw 2vw;
+  width: 6vw;
+  height: 6vw;
+}
+
+span {
+  display: inline-block;
+  font-size: 2vw;
+}
+
+p .tweet-time {
+  font-size: 0.8vw;
+  float: right;
+  margin: 0 0 0 5vw;
+}
+
+p .user-name {
+  margin: 0 0 0 0.5vw;
+}
+
+.inline {
+  display: flex;
+}
+
+.stream-content {
+  width: 85%;
+}
+
+.stream-content p {
+  text-align: center;
+  padding: 1vw 0.5vw 1vw 2vw;
+}
+
+.stream-footer {
+  width: 15%;
+  margin-top: 5vw;
+  margin-bottom: 1vw;
+}
+
+.favorite a img {
+  width: 50%;
+}
+
+.stream.fixed {
+  margin-top: 65px;
+}
+
+.erra {
+  text-align: center;
+}
+
+#top_scroll{
+    position: relative;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+}
+
+#page-top1{
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    bottom: -250px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    color: #222;
+    text-align: center;
+    text-decoration: none;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+#page-top1:hover{
+    background: ;
+    transform: translateY(-10px);
+}
+
+#top_scroll:hover{
+    background: #fff;
+}

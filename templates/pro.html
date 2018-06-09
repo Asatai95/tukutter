@@ -11,6 +11,9 @@
   <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/pro.css">
   <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/pro.css">
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/common.js"></script>
+
 
   <title>tukutter</title>
 
@@ -20,71 +23,80 @@
 <body>
 
   <header>
+    {% for pro in pros %}
     <div class="profile">
-      <a href="/pro"><img src="static/img/profile.png" alt="プロフィール"></a>
-
-      <p>taro</p>
+      <a href="/pro"><img src="{{pro[2]}}" alt="プロフィール"></a>
+      <p>{{pro[0]}}</p>
 
     </div>
     <div class="nav">
 
       <ul class="nl clearFix">
         <li><a href="/">TOP</a></li>
-        <li><a href="/search/view">検索</a></li>
+        <li><a href="/search">検索</a></li>
         <li><a href="/tweet">つぶやく</a></li>
         <li><a href="/oki">お気に入り</a></li>
-        <li><a href="/login">ログアウト</a></li>
+        <li><a href="/logout">ログアウト</a></li>
       </ul>
   </header>
 
-  <div class="profilecard">
+    <div class="profilecard">
       <div class="profile-header">
-        <img src="static/img/profile.png" alt="">
+        <img src="{{pro[2]}}" alt="">
 
-        <p><span class="user-name">taro</span><a href="#"><img class="edit" src="static/img/pencil.png" alt=""></a></p>
-
+        <p><span class="user-name">{{pro[0]}}</span><a href="/edit"><img class="edit" src="static/img/pencil.png" alt=""></a></p>
       </div>
 
       <div class="profile-content">
-        <p>はじめまして！！</p>
+        <p>{{pro[1]}}</p>
       </div>
-      <p>
-        <span class="follow">フォロー中</span>
-      </p>
+      <a href="/follower" class="square_btn">フォロワー</a>
     </div>
+    {% endfor %}
 
-    {% for myrow in rows %}
-
-
+ {% for myrow in rows %}
     <div class="stream">
 
       <div class="content">
         <div class="stream-header">
-          <img src="static/img/profile.png" alt="">
+          <img src="{{myrow[3]}}" alt="">
           <p>
 
-            <span class="user-name" name="name">{{myrow[2]}}</span>
-            <span class="tweet-time" name="time">{{myrow[0]}}</span>
+            <span class="user-name" name="name">{{myrow[0]}}</span>
+            <span class="tweet-time" name="time">{{myrow[1]}}</span>
 
           </p>
         </div>
         <div class="inline">
+
           <div class="stream-content">
 
-
-            <p name="comment">{{myrow[1]}}</p>
+            <p name="comment">{{myrow[2]}}</p>
 
           </div>
-          <div class="stream-footer">
-            <div class="favorite">
-              <a href="/oki"><img src="static/img/logo-pic.png" alt=""></a>
+        </div>
+        <div class='outline'>
+          <div class='stream-delete'>
+            <div class='delete'>
+              <a href="/pro/edit/{{myrow[4]}}" class="cp_btn">編集</a>
+            </div>
+          </div>
+          <div class='stream-delete'>
+            <div class='delete'>
+              <a href="/pro/delete/{{myrow[4]}}" class="cp_btn">削除</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  {% endfor %}
+    <footer>
+        <div id="top_scroll">
+          <a href="#" id="page-top1"><img src="static/img/logo.png" alt="ページトップスクロール"></a>
+        </div>
+    </footer>
+
+ {% endfor %}
 
 </body>
 

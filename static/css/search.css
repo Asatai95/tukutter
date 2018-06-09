@@ -7,7 +7,7 @@
 
 .profile img {
   position: absolute;
-  width: 6%;
+  width: 15%;
   margin: 1vw 1vw;
 }
 
@@ -16,76 +16,45 @@
   text-align: center;
 }
 
-/* --- ナビゲーションバー --- */
-
 div.nav {
   width: 100%;
-  /* ナビゲーションの幅 */
   background: #f9f9f9 url(../img/off.gif) repeat-x top;
-  /* ナビゲーションの背景 */
   border-top: 1px #cccccc solid;
-  /* 上境界線 */
   border-bottom: 1px #cccccc solid;
-  /* 下境界線 */
   font-size: 80%;
 }
 
-/* --- メニューエリア --- */
-
 div.nav ul.nl {
   width: 600px;
-  /* メニューの幅 */
   margin: 0 auto;
-  /* センターに配置 */
   padding: 0;
   background: #f9f9f9 url(../img/off.gif) repeat-x top;
-  /* メニューの背景 */
   border-left: 1px #cccccc solid;
-  /* メニューの左境界線 */
   border-right: 1px #ffffff solid;
-  /* メニューの右境界線 */
   list-style-type: none;
   text-align: center;
 }
 
-/* --- メニュー項目 --- */
-
 div.nav ul.nl li {
   width: 20%;
-  /* 項目の幅 */
   float: left;
 }
-
-/* --- リンク --- */
 
 div.nav ul.nl li a {
   display: block;
   position: relative;
-  /* IE6用 */
   padding: 11px 2px;
-  /* リンクエリアのパディング（上下、左右） */
   border-top: 1px #ffffff solid;
-  /* リンクエリアの上境界線 */
   border-bottom: 1px #808080 solid;
-  /* リンクエリアの下境界線 */
   border-left: 1px #ffffff solid;
-  /* リンクエリアの左境界線 */
   border-right: 1px #cccccc solid;
-  /* リンクエリアの右境界線 */
   text-decoration: none;
-  /* テキストの下線（なし） */
 }
-
-/* --- ポイント時の設定 --- */
 
 div.nav ul.nl li a:hover {
   background: #f9f9f9 url(../img/on.gif) repeat-x top;
-  /* ポイント時の背景 */
   text-decoration: underline;
-  /* テキストの下線（あり） */
 }
-
-/* --- clearfix --- */
 
 .clearFix:after {
   content: ".";
@@ -131,16 +100,20 @@ dl.search_box dd {
 
 dl.search_box dd button {
 	display:block;
-	/*padding:10px;*/
 	background:none;
 	border:none;
+  cursor: pointer;
+  padding-top: 5px;
 }
 
 dl.search_box dd button span {
 	display:block;
+  padding-right: 10px;
+  padding-bottom: 10px;
 	width:20px;
 	height:20px;
-	background:url(../img/searches.png) no-repeat scroll 0 0;
+	background:url(../img/megane.png) no-repeat scroll 0 0;
+  background-size: 30px;
 }
 
 input[type="text"] {
@@ -163,25 +136,23 @@ input[type="text"] {
 
 .stream-header img {
   margin: 1vw 1vw;
-  width: 4vw;
-  height: 4vw;
+  width: 6vw;
+  height: 6vw;
 }
 
 span {
   display: inline-block;
   font-size: 2vw;
-  margin: 3vw 0 0 0.5vw;
 }
 
-span .tweet-time {
+p .tweet-time {
   font-size: 0.8vw;
+  float: right;
+  margin: 0 0 0 5vw;
 }
 
-span .follow {
-  margin-left: 1vw;
-  padding: 0.2vw;
-  font-size: 0.8vw;
-  background-color: #B9DCF2;
+p .user-name {
+  margin: 0 0 0 0.5vw;
 }
 
 .inline {
@@ -213,4 +184,48 @@ span .follow {
 
 .erra {
   text-align: center;
+  font-weight: 400;
+  font-size: 30px;
+  background: white;
+}
+
+.content {
+  margin-top: 30px;
+}
+
+header .profile {
+  display: inline-block;
+  width: 100%;
+}
+
+#top_scroll{
+    position: relative;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+}
+
+#page-top1{
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    bottom: -250px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    color: #222;
+    text-align: center;
+    text-decoration: none;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+#page-top1:hover{
+    background: ;
+    transform: translateY(-10px);
+}
+
+#top_scroll:hover{
+    background: #fff;
 }

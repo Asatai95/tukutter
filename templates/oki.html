@@ -6,11 +6,13 @@
   <meta name='keywords' content=''>
   <meta name='description' content="">
   <meta name='viewport' content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" media='screen' href="static/css/fab.css">
+  <link rel="stylesheet" media='screen' href="static/css/oki.css">
 
-  <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/fab.css">
-  <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/fab.css">
+  <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/oki.css">
+  <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/oki.css">
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/common.js"></script>
 
   <title>tukutter</title>
 
@@ -18,45 +20,64 @@
 
 
 <body>
+  {% for tests in test %}
   <header>
     <div class="profile">
-      <img src="static/img/profile.png" alt="プロフィール">
-      <p>taro</p>
+      <a href="/pro"><img src="{{tests[1]}}" alt="プロフィール"></a>
+      <p>{{tests[0]}}</p>
     </div>
+  {% endfor %}
     <div class="nav">
 
       <ul class="nl clearFix">
         <li><a href="/">TOP</a></li>
-        <li><a href="/serch">検索</a></li>
+        <li><a href="/search">検索</a></li>
         <li><a href="/tweet">つぶやく</a></li>
         <li><a href="/oki">お気に入り</a></li>
-        <li><a href="/login">ログアウト</a></li>
+        <li><a href="/logout">ログアウト</a></li>
       </ul>
 
     </div>
 
   </header>
+{% if count > 1 %}
+ <div class='sub'>
+  <div class=erra><img src="static/img/oki.png">
+    <p>{{com}}</p>
+  </div>
+ </div>
+{% endif %}
 
+{% for oki in okis %}
+ <div class="stream">
   <div class="content">
     <div class="stream-header">
-      <img src="static/img/profile.png" alt="">
+      <a href="/pro/{{oki[5]}}"><img src="{{oki[2]}}" alt=""></a>
       <p>
-        <span class="user-name">taro</span>
-        <span class="tweet-time">2017/11/22/ 16:20</span>
-        <span class="follow">フォロー中</span>
+        <span class="tweet-time">{{oki[4]}}</span>
+        <span class="user-name">{{oki[1]}}</span>
       </p>
     </div>
     <div class="inline">
       <div class="stream-content">
-        <p>test</p>
+        <p>{{oki[3]}}</p>
       </div>
       <div class="stream-footer">
         <div class="favorite">
-          <a href="/oki"><img src="static/img/logo-pic.png" alt=""></a>
+          <a href="/delete/{{oki[0]}}"><img src="static/img/fab_out.png" alt=""></a>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+ {% endfor %}
+
+ <footer>
+     <div id="top_scroll">
+       <a href="#" id="page-top1"><img src="static/img/logo.png" alt="ページトップスクロール"></a>
+     </div>
+ </footer>
 
 </body>
 </html>

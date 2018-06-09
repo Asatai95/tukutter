@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media='screen' href="static/css/edit.css">
+
+  <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/edit.css">
+  <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/edit.css">
+
+
+  <title>編集</title>
+
+</head>
+
+<body>
+
+  <header>
+    {% for pro in pros %}
+    <div class="profile">
+      <a href="pro"><img src="{{pro[0]}}" alt="プロフィール"></a>
+      <p>{{pro[2]}}</p>
+    </div>
+    <div class="nav">
+
+      <ul class="nl clearFix">
+        <li><a href="/">TOP</a></li>
+        <li><a href="/search">検索</a></li>
+        <li><a href="/tweet">つぶやく</a></li>
+        <li><a href="/oki">お気に入り</a></li>
+        <li><a href="/logout">ログアウト</a></li>
+      </ul>
+  </header>
+
+  <main id="profile_edit">
+    <div class="logo">
+      <p>ユーザー登録</p>
+    </div>
+    <div class='text'>
+        <div class='erra'>
+          <p>{{error}}</p>
+        </div>
+    </div>
+    <form action="/edit" method="POST" enctype="multipart/form-data">
+      <div class="inline">
+        <label for="userid">image</label>
+        <img src="{{pro[0]}}" alt="プロフィール画像">
+        <input id="img_file" class="file" type="file" name="img_file" value="画像選択">
+        <!-- <label for="file" class="view_box">
+          +画像を選択
+          <input id="file" class="file" type="file" name="file" value="" style="display:none;">
+        </label> -->
+      </div>
+
+      <div class="inline">
+        <label for="userid">userID</label>
+        <input type="text" name="userid" value="{{pro[1]}}">
+      </div>
+      <div class="inline">
+        <label for="password">password</label>
+        <input type="password" name="passwd" value="">
+      </div>
+      <div class="inline">
+        <label for="password">password確認</label>
+        <input type="password" name="passwd" value="">
+      </div>
+      <div class="inline">
+        <label for="password">お名前</label>
+        <input type="text" name="user_name" value="{{pro[2]}}">
+      </div>
+      <div class="inline">
+        <label for="password">ひと言</label>
+        <textarea type="text" name="user_intro" value="">{{pro[3]}}</textarea>
+      </div>
+        {% endfor %}
+      <input class="button" type="submit" value="登録" />
+    </form>
+  </main>
+</body>
+</html>

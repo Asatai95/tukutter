@@ -107,3 +107,21 @@ input[type="password"] {
   background-image: linear-gradient(to bottom, #f5c7c7, #f5c7c7);
   text-decoration: none;
 }
+
+.error {
+  text-align: center;
+}
+
+.error_log {
+  font-weight: 400;
+  font-size: 18px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.error_login {
+  font-weight: 400;
+  font-size: 16px;
+  color: red;
+  margin-bottom: 10px;
+}

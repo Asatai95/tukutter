@@ -12,29 +12,31 @@
   <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/tweet.css">
 
 
-  <title>TOP画面</title>
+  <title>tukutter</title>
 
 </head>
 
 <body>
 
   <header>
+    {% for tweet in tweets %}
     <div class="profile">
-      <a href="/pro"><img src="static/img/profile.png" alt="プロフィール"></a>
-      <p>taro</p>
+      <a href="/pro"><img src="{{tweet[0]}}" alt="プロフィール"></a>
+      <p>{{tweet[1]}}</p>
     </div>
+    {% endfor %}
     <div class="nav">
 
       <ul class="nl clearFix">
         <li><a href="/">TOP</a></li>
-        <li><a href="/view">検索</a></li>
+        <li><a href="/search">検索</a></li>
         <li><a href="/tweet">つぶやく</a></li>
         <li><a href="/oki">お気に入り</a></li>
-        <li><a href="/login">ログアウト</a></li>
+        <li><a href="/logout">ログアウト</a></li>
       </ul>
   </header>
 
-  <hr>
+
 
   <div class='tweet_box'>
     <div class='tweet_comment'>

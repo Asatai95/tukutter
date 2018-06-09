@@ -1,7 +1,7 @@
 @charset "utf-8";
-hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
+
+header {
+  margin-bottom: 40px;
 }
 
 .profile {
@@ -11,7 +11,7 @@ hr {
 
 .profile img {
   position: absolute;
-  width: 6%;
+  width: 15%;
   margin: 1vw 1vw;
 }
 
@@ -114,12 +114,12 @@ div.nav ul.nl li a:hover {
   width: 300px;
   height: 320px;
   text-align: center;
-  background:#CCFFFF;
-  background-image: -webkit-linear-gradient(top, #CCFFFF, Courier New);
-  background-image: -moz-linear-gradient(top, #CCFFFF, Courier New);
-  background-image: -ms-linear-gradient(top, #CCFFFF, Courier New);
-  background-image: -o-linear-gradient(top, #CCFFFF, Courier New);
-  background-image: linear-gradient(to bottom, #CCFFFF, Courier New);
+  background:#EEEEEE;
+  background-image: -webkit-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -moz-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -ms-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -o-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: linear-gradient(to bottom, #EEEEEE, Courier New);
   -webkit-border-radius: 6;
   -moz-border-radius: 6;
 }

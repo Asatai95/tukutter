@@ -1,0 +1,19 @@
+@application.route('/pro')
+def profile_db():
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select user_name, user_intro, created_at, tweet_comment from tweet inner join users on tweet.user_id = users.log_id where log_id = '" + data + "' "
+    con.execute(sql)
+    print(sql)
+    db.commit()
+
+    result = con.fetchall()
+    print(result)
+
+    return render_template('pro.html', rows=result)

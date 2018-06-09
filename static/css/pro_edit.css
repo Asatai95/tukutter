@@ -1,0 +1,174 @@
+@charset "utf-8";
+
+header {
+  margin-bottom: 40px;
+}
+
+.profile {
+  display: inline-block;
+  width: 100%;
+}
+
+.profile img {
+  position: absolute;
+  width: 15%;
+  margin: 1vw 1vw;
+}
+
+.profile p {
+  font-size: 5vw;
+  text-align: center;
+}
+
+/* --- ナビゲーションバー --- */
+
+div.nav {
+  width: 100%;
+  /* ナビゲーションの幅 */
+  background: #f9f9f9 url(../img/off.gif) repeat-x top;
+  /* ナビゲーションの背景 */
+  border-top: 1px #cccccc solid;
+  /* 上境界線 */
+  border-bottom: 1px #cccccc solid;
+  /* 下境界線 */
+  font-size: 80%;
+}
+
+/* --- メニューエリア --- */
+
+div.nav ul.nl {
+  width: 600px;
+  /* メニューの幅 */
+  margin: 0 auto;
+  /* センターに配置 */
+  padding: 0;
+  background: #f9f9f9 url(../img/off.gif) repeat-x top;
+  /* メニューの背景 */
+  border-left: 1px #cccccc solid;
+  /* メニューの左境界線 */
+  border-right: 1px #ffffff solid;
+  /* メニューの右境界線 */
+  list-style-type: none;
+  text-align: center;
+}
+
+/* --- メニュー項目 --- */
+
+div.nav ul.nl li {
+  width: 20%;
+  /* 項目の幅 */
+  float: left;
+}
+
+/* --- リンク --- */
+
+div.nav ul.nl li a {
+  display: block;
+  position: relative;
+  /* IE6用 */
+  padding: 11px 2px;
+  /* リンクエリアのパディング（上下、左右） */
+  border-top: 1px #ffffff solid;
+  /* リンクエリアの上境界線 */
+  border-bottom: 1px #808080 solid;
+  /* リンクエリアの下境界線 */
+  border-left: 1px #ffffff solid;
+  /* リンクエリアの左境界線 */
+  border-right: 1px #cccccc solid;
+  /* リンクエリアの右境界線 */
+  text-decoration: none;
+  /* テキストの下線（なし） */
+}
+
+/* --- ポイント時の設定 --- */
+
+div.nav ul.nl li a:hover {
+  background: #f9f9f9 url(../img/on.gif) repeat-x top;
+  /* ポイント時の背景 */
+  text-decoration: underline;
+  /* テキストの下線（あり） */
+}
+
+/* --- clearfix --- */
+
+.clearFix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearFix {
+  min-height: 1px;
+}
+
+.tweet_box {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: #6091d3;
+  background: #FFF;
+  border: solid 5px #6091d3;
+  border-radius: 10px;
+  width: 300px;
+  height: 305px;
+  text-align: center;
+  background:#EEEEEE;
+  background-image: -webkit-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -moz-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -ms-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -o-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: linear-gradient(to bottom, #EEEEEE, Courier New);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+}
+
+.tweet_box {
+  margin: 20px auto;
+  padding: 0;
+}
+
+textarea {
+  width: 200px;
+  height: 200px;
+  font-size: 1.3em;
+  margin: 10px auto;
+}
+
+.submit {
+  text-align: center;
+}
+
+.submit input {
+  background: #fff;
+  background-image: -webkit-linear-gradient(top, #fff, #fff);
+  background-image: -moz-linear-gradient(top, #fff, #fff);
+  background-image: -ms-linear-gradient(top, #fff, #fff);
+  background-image: -o-linear-gradient(top, #fff, #fff);
+  background-image: linear-gradient(to bottom, #fff, #fff);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  -webkit-box-shadow: 1px 1px 3px #666666;
+  -moz-box-shadow: 1px 1px 3px #666666;
+  box-shadow: 1px 1px 3px #666666;
+  font-family: Courier New;
+  color: #4169E1;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 8px 15px 8px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.submit input:hover {
+  background: #E6E6FA;
+  background-image: -webkit-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: -moz-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: -ms-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: -o-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: linear-gradient(to bottom, #E6E6FA, #E6E6FA);
+  text-decoration: none;
+}

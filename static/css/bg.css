@@ -1,0 +1,300 @@
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 1024px;
+  font-family: Verdana, "ＭＳ Ｐゴシック", sans-serif;
+  font-size: 80%;
+  text-align: center;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+}
+
+html {
+  overflow-y: scroll;
+  background: #fff;
+  background-size: cover;
+}
+
+.inline {
+  border-bottom: 2px solid black;
+  width: 800px;
+  margin: auto;
+}
+
+#dropmenu {
+  list-style-type: none;
+  width: 800px;
+  height: 40px;
+  margin: 30px auto 100px;
+  padding: 0;
+  background: #8a9b0f;
+  border-bottom: 5px solid #535d09;
+  border-radius: 3px 3px 0 0;
+}
+
+#dropmenu li {
+  position: relative;
+  width: 20%;
+  float: left;
+  margin: 0 53px;
+  padding: 0;
+  text-align: center;
+}
+
+#dropmenu li a {
+  display: block;
+  margin: 0;
+  padding: 15px 0 11px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  text-decoration: none;
+}
+
+#dropmenu li:hover>a {
+  background: #6e7c0c;
+  color: #eff7b1;
+}
+
+#dropmenu>li:hover>a {
+  border-radius: 3px 3px 0 0;
+}
+
+#dropmenu li ul {
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 0 3px 3px;
+}
+
+#dropmenu li:last-child ul {
+  left: -100%;
+  width: 100%
+}
+
+#dropmenu li ul li {
+  overflow: hidden;
+  width: 200%;
+  height: 0;
+  color: #fff;
+  -moz-transition: .2s;
+  -webkit-transition: .2s;
+  -o-transition: .2s;
+  -ms-transition: .2s;
+  transition: .2s;
+}
+
+#dropmenu li ul li a {
+  padding: 13px 15px;
+  background: #6e7c0c;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+#dropmenu li:hover ul li {
+  overflow: visible;
+  height: 38px;
+  border-top: 1px solid #7c8c0e;
+  border-bottom: 1px solid #616d0b
+}
+
+#dropmenu li:hover ul li:first-child {
+  border-top: 0;
+}
+
+#dropmenu li:hover ul li:last-child {
+  border-bottom: 0;
+}
+
+#dropmenu li:hover ul li:last-child a {
+  border-radius: 0 0 3px 3px;
+}
+
+.kounyu {
+  width: 800px;
+  height: 50px;
+  margin: auto;
+  padding: 50px 0;
+  background: url("../img/bg.png") no-repeat, rgba(255, 255, 255, 0.3);
+  background-size: 800px 300px;
+}
+
+.coment {
+  float: left;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  margin-left: 210px;
+}
+
+.shiharai {
+  float: right;
+  margin-right: 200px;
+}
+
+.square_btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #FFF;
+  background: #7c8c0e;
+  border-bottom: solid 2px #d27d00;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+.square_btn:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
+.content p {
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  color: black;
+}
+
+.content li {
+  margin: auto;
+  list-style: none;
+}
+
+.content {
+  padding: 0 0 100px 0;
+  margin: auto;
+}
+
+.content2 {
+  padding: 100px 0;
+  margin: auto;
+}
+
+.content3 {
+  padding: 100px 0;
+  margin: auto;
+}
+
+.content2 p {
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  color: black;
+  text-align: center;
+}
+
+.content2 li {
+  margin: auto;
+  list-style: none;
+}
+
+.content3 p {
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  color: black;
+  text-align: center;
+}
+
+.content3 li {
+  margin: auto;
+  list-style: none;
+}
+
+.baga img {
+  /*margin: 10px 10px;*/
+  width: 280px;
+  height: 100px;
+}
+
+.baga ul {
+  margin: 0 -30px 0 0;
+  padding: 50px;
+  margin: auto;
+}
+
+.baga li {
+  float: left;
+  margin: 0 30px 30px 30px;
+  text-align: left;
+}
+
+.side img {
+  width: 150px;
+  height: 230px;
+}
+
+.side ul {
+  margin: 0 -30px 0 0;
+  padding: 50px;
+  margin: auto;
+}
+
+.side li {
+  float: left;
+  margin: 0 30px 30px 30px;
+  text-align: left;
+}
+
+.drink img {
+  width: 210px;
+  height: 190px;
+}
+
+.drink ul {
+  margin: 0 -30px 0 0;
+  padding: 50px;
+  margin: auto;
+}
+
+.drink li {
+  float: left;
+  margin: 0 30px 30px 30px;
+  text-align: left;
+}
+
+.inline {
+  margin-top: 50px;
+}
+
+footer {
+  background: #6e7c0c;
+  height: 80px;
+  margin-top: 100px;
+}
+
+.footer {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: #fff;
+  text-align: center;
+  padding-top: 30px;
+  letter-spacing: 1px;
+}
+
+.content .baga .bg .under {
+  text-align: center;
+  margin: auto;
+  text-decoration: none;
+}
+
+.content2 .side p {
+  text-align: center;
+}
+
+.content3 .drink p {
+  text-align: center;
+}

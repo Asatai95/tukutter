@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media='screen' href="../../static/css/pro_edit.css">
+
+  <link rel="stylesheet" media='screen and min-width:1024px)' href="../../static/css/pro_edit.css">
+  <link rel="stylesheet" media='screen and max-width:1023px)' href="../../static/css/pro_edit.css">
+
+
+  <title>tukutter</title>
+
+</head>
+
+<body>
+
+  <header>
+    {% for test in tests %}
+    <div class="profile">
+      <a href="/pro"><img src="../../{{test[1]}}" alt="プロフィール"></a>
+      <p>{{test[0]}}</p>
+    </div>
+    {% endfor %}
+    <div class="nav">
+
+      <ul class="nl clearFix">
+        <li><a href="/">TOP</a></li>
+        <li><a href="/search">検索</a></li>
+        <li><a href="/tweet">つぶやく</a></li>
+        <li><a href="/oki">お気に入り</a></li>
+        <li><a href="/logout">ログアウト</a></li>
+      </ul>
+  </header>
+
+
+
+  <div class='tweet_box'>
+    <div class='tweet_comment'>
+      <form action="/pro/edit/{{pro_id}}" method="POST">
+       {% for view in views %}
+         <textarea cols="30" rows="5" maxlength="150" name="write" wrap="hard">{{view[0]}}</textarea>
+       {% endfor %}
+       <div class='erra'>{{test}}</div>
+        <div class='submit'>
+          <input type="submit" name="save" value="EDIT">
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

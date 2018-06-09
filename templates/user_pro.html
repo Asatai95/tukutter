@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media='screen' href="../static/css/user_pro.css">
+
+  <link rel="stylesheet" media='screen and min-width:1024px)' href="../static/css/user_pro.css">
+  <link rel="stylesheet" media='screen and max-width:1023px)' href="../static/css/user_pro.css">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="../static/js/common.js"></script>
+
+  <title>tukutter</title>
+
+</head>
+
+
+<body>
+
+  <header>
+    {% for pro in pros %}
+    <div class="profile">
+      <img src="../{{pro[2]}}" alt="プロフィール">
+      <p>{{pro[0]}}</p>
+
+    </div>
+    <div class="nav">
+
+      <ul class="nl clearFix">
+        <li><a href="/">TOP</a></li>
+        <li><a href="/search">検索</a></li>
+        <li><a href="/tweet">つぶやく</a></li>
+        <li><a href="/oki">お気に入り</a></li>
+        <li><a href="/logout">ログアウト</a></li>
+      </ul>
+  </header>
+
+    <div class="profilecard">
+      <div class="profile-header">
+        <img src="../{{pro[2]}}" alt="">
+
+        <p><span class="user-name">{{pro[0]}}</span></p>
+      </div>
+
+      <div class="profile-content">
+        <p>{{pro[1]}}</p>
+      </div>
+      <a href="/follow/{{pro[3]}}" class="square_btn">フォローする</a>
+    </div>
+    {% endfor %}
+
+ {% for myrow in user_pro %}
+    <div class="stream">
+
+      <div class="content">
+        <div class="stream-header">
+          <img src="../{{myrow[3]}}" alt="">
+          <p>
+
+            <span class="tweet-time" name="time">{{myrow[0]}}</span>
+            <span class="user-name" name="name">{{myrow[2]}}</span>
+
+
+          </p>
+        </div>
+        <div class="inline">
+          <div class="stream-content">
+
+
+            <p name="comment">{{myrow[1]}}</p>
+
+          </div>
+          <div class="stream-footer">
+            <div class="favorite">
+              <a href="/oki/{{myrow[4]}}"><img src="../static/img/logo-pic.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+        <div id="top_scroll">
+          <a href="#" id="page-top1"><img src="../static/img/logo.png" alt="ページトップスクロール"></a>
+        </div>
+    </footer>
+
+ {% endfor %}
+
+</body>
+
+
+</html>
