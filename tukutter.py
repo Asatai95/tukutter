@@ -1,8 +1,21 @@
 import MySQLdb
 import time
-from flask import Flask, request, render_template, redirect, make_response
+import os
+from flask import Flask, request, render_template, redirect, make_response, send_from_directory, url_for, flash
+from werkzeug import secure_filename
 
 application = Flask(__name__)
+
+UPLOAD_FOLDER = './static/img/'
+ALLOWED_EXTENSIONS = set(['png', 'jpeg', 'gif'])
+path = './static/img/*.ALLOWED_EXTENSIONS'
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['SECRET_KEY'] = os.urandom(24)
+
+def allowed_file(filename):
+
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @application.route('/')
 def top_db():
@@ -14,7 +27,7 @@ def top_db():
     con = db.cursor()
     print('???')
 
-    sql = "select created_at, tweet_comment, user_name from tweet inner join users on tweet.user_id = users.id where log_id != '" + data + "' "
+    sql = "select tweet.tw_id, created_at, tweet_comment, user_name, user_img, log_id from tweet inner join users on tweet.user_id = users.log_id where log_id != '" + data + "' "
     con.execute(sql)
     db.commit()
     print(sql)
@@ -22,11 +35,44 @@ def top_db():
     result = con.fetchall()
     print(result)
 
-    return render_template('top.html', rows=result)
+    if sql is not False:
 
+        sql = "select user_name, user_img from users where log_id = '" + data + "'"
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        top = con.fetchall()
+        print(top)
+
+    return render_template('top.html', rows=result, tops=top)
+
+@application.route('/follow/<follow_id>')
+def top(follow_id=None):
+
+    data = request.cookies.get('name', None)
+    print(data)
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    print(time_stamp)
+    text = 'フォロー中'
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('test')
+
+    sql = 'insert into follow(log_id, user_id, follow_time, follow_text) values(%s, %s, %s, %s) on duplicate key update user_id = "' + follow_id + '", log_id = "' + data + '", id=LAST_INSERT_ID(id) '
+    con.execute(sql, [data, follow_id, time_stamp, text])
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/follower')
 
 @application.route('/login')
 def login():
+
 
     return render_template('login.html')
 
@@ -36,150 +82,147 @@ def login_db():
     log = request.form['log_id']
     pas = request.form['passwd']
 
+    if log == (''):
 
-    db = MySQLdb.connect( user='root', passwd='asatai95',
-        host='localhost', db='tukutter', charset='utf8')
+        error_log = 'ログインIDを入力してください'
 
-    con = db.cursor()
+        return render_template('login.html', error_log=error_log)
 
-    sql = "select log_id, passwd from users where log_id = '" + log + "' and passwd = '" + pas + "'"
-    con.execute(sql)
+    elif pas == (''):
 
-    result = con.fetchall()
+        error_pas = 'パスワードを入力してください'
 
-    if len(result) is 1:
-
-        print('top.html')
-
-        resp = make_response(render_template('top.html'))
-        resp.set_cookie('name' , log)
-        print(resp)
-
-        return resp
+        return render_template('login.html', error_pas=error_pas)
 
     else:
-        print('login.html')
-        return redirect('http://localhost:8080/login')
 
-    print(result)
+        db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
 
+        sql = "select log_id, passwd from users where log_id = '" + log + "' and passwd = '" + pas + "' "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        if result == ():
+
+            error_login = 'ログインID、またはパスワードが異なります。'
+
+            return render_template('login.html', error_login=error_login)
+
+        else:
+
+            print('top.html')
+
+            resp = make_response(redirect('http://localhost:8080/'))
+            resp.set_cookie('name' , log)
+            print(resp)
+
+            return resp
 
 @application.route('/logout')
 def logout():
 
-    return redirect('https://localhost:8080/login')
+    resp = make_response(redirect('http://localhost:8080/login'))
+    resp.set_cookie('', '')
+    print(resp)
 
+    return resp
 
 @application.route('/new')
 def new():
 
-    html = render_template('new.html')
-
-    print(html)
-    return html
+    return render_template('new.html')
 
 @application.route('/new', methods=['POST'])
 def new_db():
 
     log_id = request.form['log_id']
+    print(log_id)
     passwd = request.form['passwd']
+    print(passwd)
     user_name = request.form['user_name']
+    print(user_name)
+    img_file = request.files["img_file"]
+    print(img_file)
 
-    db = MySQLdb.connect( user='root', passwd='asatai95',
-        host='localhost', db='tukutter', charset='utf8')
+    if log_id == ('') and passwd == ('') and user_name == (''):
+        return render_template("new.html", error='全ての内容を入力してください。')
+    elif log_id == (''):
+        return render_template("new.html", error='ログインIDを入力してください。')
+    elif passwd == (''):
+        return render_template("new.html", error='パスワードを入力してください。')
+    elif user_name == (''):
+        return render_template("new.html", error='名前を入力してください。')
 
-    con = db.cursor()
+    else:
 
-    sql = 'insert ignore into users(log_id,passwd,user_name) values(%s,%s,%s)'
-    con.execute(sql,[log_id,passwd,user_name])
+        if img_file and allowed_file(img_file.filename):
+            filename = secure_filename(img_file.filename)
+            img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+            path = UPLOAD_FOLDER + filename
+            print(path)    
 
-    db.commit()
+            db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+            con = db.cursor()
 
-    db.close()
-    con.close()
+            sql = 'insert into users(log_id,passwd,user_name,user_img) values(%s,%s,%s,%s)'
 
-    print('http://localhost:8080/')
-    return redirect('http://localhost:8080/')
+            try:
+
+                test = con.execute(sql,[log_id,passwd,user_name,path])
+                db.commit()
+                print(test)
+
+                result = con.fetchall()
+                print(result)
+
+            except MySQLdb.IntegrityError:
+
+                error = 'すでに登録されているログインIDです。'
+
+                return render_template('new.html', log_error=error)
+
+            resp = make_response(redirect('http://localhost:8080/tweet'))
+            resp.set_cookie("name", log_id)
+            print(resp)
+
+            return resp
+
+        else:
+
+            path = './static/img/profile.png'
+            print(path)
+
+            db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+            con = db.cursor()
+            print('test')
+
+            sql = 'insert into users(log_id,passwd,user_name,user_img) values(%s,%s,%s,%s)'
+
+            try:
+
+                test = con.execute(sql,[log_id,passwd,user_name,path])
+                db.commit()
+                print(test)
+
+            except MySQLdb.IntegrityError:
+
+                    error = 'すでに登録されているログインIDです。'
+
+                    return render_template('new.html', log_error=error)
+
+            resp = make_response(redirect('http://localhost:8080/tweet'))
+            resp.set_cookie("name", log_id)
+            print(resp)
+
+            return resp
 
 @application.route('/tweet')
 def tweet():
-
-    return render_template('tweet.html')
-
-@application.route('/tweet', methods=['POST'])
-def tweet_db():
-
-    test = request.form['tweet']
-    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
-
-    if len(test) is 0:
-
-        return render_template('tweet.html', test='文字を入力して下さい')
-
-    db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
-    con = db.cursor()
-
-    sql = 'insert into tweet(user_id, tweet_comment, created_at) values(1 ,%s, %s)'
-    con.execute(sql, [test, time_stamp])
-    db.commit()
-    print(sql)
-
-
-    db.close()
-    con.close()
-
-    return render_template('tweet.html')
-
-@application.route('/view')
-def search():
-
-    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
-    con = db.cursor()
-    print('???')
-
-    sql = "select tweet_comment, created_at, user_name from tweet inner join users on tweet.user_id = users.id"
-    con.execute(sql)
-    db.commit()
-    print(sql)
-
-    result = con.fetchall()
-    print(result)
-
-    return render_template('search.html', rows=result)
-
-@application.route('/search', methods=['POST'])
-def search_db():
-
-    search = request.form["search"]
-
-    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
-    con = db.cursor()
-    print('???')
-
-    sql = "select tweet_comment, created_at, user_name from tweet inner join users on tweet.user_id = users.id where tweet_comment like '" '%' + search + '%' "' "
-    con.execute(sql)
-    db.commit()
-
-    result = con.fetchall()
-    print(result)
-
-    if result == ():
-
-        return render_template('search.html', test='該当なし')
-
-
-    return render_template('search.html', rows=result)
-
-
-
-
-# @application.route('/pro')
-# def profile():
-#
-#     return render_template('pro.html')
-
-@application.route('/pro')
-def profile_db():
 
     data = request.cookies.get('name', None)
     print(data)
@@ -188,7 +231,7 @@ def profile_db():
     con = db.cursor()
     print('???')
 
-    sql = "select created_at, tweet_comment, user_name from tweet inner join users on tweet.user_id = users.id where log_id = '" + data + "'"
+    sql = 'select user_img, user_name from users where log_id = "' + data + '" '
     con.execute(sql)
     db.commit()
     print(sql)
@@ -196,24 +239,57 @@ def profile_db():
     result = con.fetchall()
     print(result)
 
-    return render_template('pro.html', rows=result)
+    return render_template('tweet.html', tweets=result)
 
+@application.route('/tweet', methods=['POST'])
+def tweet_db():
 
-@application.route('/oki')
-def oki():
+    data = request.cookies.get("name", None)
+    print(data)
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    test = request.form['tweet']
+    print(time_stamp)
+    print(test)
 
-    return render_template('oki.html')
+    if len(test) is 0:
 
-@application.route('/top', methods=['POST'])
-def oki_db():
+        return render_template('tweet.html', test='文字を入力して下さい')
 
-    oki = request.form['oki']
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+
+    sql = "insert into tweet(tweet_comment, created_at) values(%s, %s)"
+    con.execute(sql, [test, time_stamp])
+
+    print(sql)
+
+    if sql is not False:
+
+        db.commit()
+
+        sql = "update tweet set user_id = '" + data + "' order by tw_id DESC limit 1 "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        return redirect('http://localhost:8080/pro')
+
+    return render_template('tweet.html')
+
+@application.route('/search')
+def search():
+
+    data = request.cookies.get("name", None)
+    print(data)
 
     db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
     con = db.cursor()
     print('???')
 
-    sql = "insert into fab(tweet_id,user_id) values(1,1)"
+    sql = "select tweet_comment, created_at, user_name, user_img, log_id from tweet inner join users on tweet.user_id = users.log_id where log_id != '" + data + "'"
     con.execute(sql)
     db.commit()
     print(sql)
@@ -221,4 +297,483 @@ def oki_db():
     result = con.fetchall()
     print(result)
 
-    return render_template('pro.html', rows=result)
+    if sql is not False:
+
+        sql = 'select user_name, user_img from users where log_id = "' + data + '" '
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        view = con.fetchall()
+        print(view)
+
+    return render_template('search.html', rows=result, views=view)
+
+@application.route('/search', methods=['POST'])
+def search_db():
+
+    data = request.cookies.get("name", None)
+    print(data)
+    search = request.form["search"]
+    print(search)
+
+    if search == (''):
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = 'select user_name, user_img from users where log_id = "' + data + '"'
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        search = con.fetchall()
+        print(search)
+
+        return render_template('search.html', test='キーワードを入力してください。', views=search)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select tweet_comment, created_at, user_name, user_img, tw_id from tweet inner join users on tweet.user_id = users.log_id where tweet_comment like '" '%' + search + '%' "' "
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    if result == () :
+
+        sql = 'select user_name, user_img from users where log_id = "' + data + '" '
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        view = con.fetchall()
+        print(view)
+
+        return render_template('search.html', test='該当なし', views=view)
+
+    else:
+
+        sql = 'select user_name, user_img from users where log_id = "' + data + '" '
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        view = con.fetchall()
+        print(view)
+
+    return render_template('search.html', rows=result, views=view)
+
+@application.route('/pro')
+def pro():
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select user_name, user_intro, user_img from users where log_id = '" + data + "'"
+    con.execute(sql)
+    db.commit()
+    print(sql)
+    test = con.fetchall()
+    print(test)
+
+    if sql is not False:
+
+        sql = "select user_name, created_at, tweet_comment, user_img, tw_id from tweet inner join users on tweet.user_id = users.log_id where log_id = '" + data + "' "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+    return render_template('pro.html', rows=result, pros=test)
+
+@application.route('/pro/edit/<pro_id>')
+def pro_view(pro_id=None):
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select user_name, user_img from users where log_id = '" + data + "' "
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    if sql is not False:
+
+        sql = "select tweet_comment from tweet where tw_id = '" + pro_id + "' "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        test = con.fetchall()
+        print(test)
+
+    return render_template('pro_edit.html', tests=result, views=test, pro_id=pro_id)
+
+@application.route('/pro/edit/<pro_id>', methods=['POST'])
+def pro_id(pro_id=None):
+
+    data = request.cookies.get('name', None)
+    print(data)
+    write = request.form['write']
+    print(write)
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    print(time_stamp)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'update tweet set tweet_comment = "' + write + '", created_at = "' + time_stamp + '" where tw_id = "' + pro_id + '" '
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/pro')
+
+@application.route('/pro/delete/<pro_id>')
+def pro_delete(pro_id=None):
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'delete from tweet where tw_id = "' + pro_id + '" '
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/pro')
+
+@application.route('/edit')
+def edit():
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'select user_img, id, user_name, user_intro from users where log_id = "' + data + '" '
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return render_template('edit.html', pros=result)
+
+@application.route('/edit', methods=['POST'])
+def edit_db():
+
+
+    data = request.cookies.get('name', None)
+    print(data)
+    passwd = request.form["passwd"]
+    print(passwd)
+    user_name = request.form["user_name"]
+    print(user_name)
+    user_intro = request.form["user_intro"]
+    print(user_intro)
+    img_file = request.files["img_file"]
+    print(img_file)
+
+
+    if passwd == (''):
+
+        error = 'passwordを入力してください！！'
+
+        data = request.cookies.get('name', None)
+        print(data)
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = 'select user_img, id, user_name, user_intro from users where log_id = "' + data + '" '
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        return render_template('edit.html', pros=result, error=error)
+
+
+    if img_file and allowed_file(img_file.filename):
+       filename = secure_filename(img_file.filename)
+       img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+       path = UPLOAD_FOLDER + filename
+       print(path)
+
+    else:
+
+        path = './static/img/profile.png'
+
+        data = request.cookies.get('name', None)
+        print(data)
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = "update users set user_img = %s, passwd = '" + passwd + "', user_name = '" + user_name + "', user_intro = '" + user_intro + "' where log_id = '" + data + "' "
+        con.execute(sql, [path])
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        return redirect('http://localhost:8080/pro')
+
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "update users set user_img = %s, passwd = '" + passwd + "', user_name = '" + user_name + "', user_intro = '" + user_intro + "' where log_id = '" + data + "' "
+    con.execute(sql, [path])
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/pro')
+
+@application.route('/oki/<user_id>')
+def oki(user_id=None):
+
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'insert into fab(tweet_id, log_id, fab_time) values(%s, %s, %s) on duplicate key update tweet_id = "' + user_id + '", log_id = "' + data + '", id=LAST_INSERT_ID(id) '
+    con.execute(sql, [user_id, data, time_stamp])
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/oki')
+
+
+@application.route('/oki')
+def oki_db():
+
+    data = request.cookies.get('name', None)
+    print(data)
+
+    coun = 1
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select tweet.tw_id, user_name, user_img, tweet_comment, tweet.created_at, users.log_id from tweet inner join users on tweet.user_id = users.log_id inner join fab on fab.tweet_id = tweet.tw_id where fab.log_id = '" + data + "' "
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    if result == ():
+
+        co = 3
+        data = request.cookies.get('name', None)
+        print(data)
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = "select user_name, user_img from users where log_id = '" + data + "' "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        oki = con.fetchall()
+        print(oki)
+
+        return render_template('oki.html', com='誰かの投稿をお気に入りしてみよう👍', test=oki, count=co)
+
+    else:
+
+        data = request.cookies.get('name', None)
+        print(data)
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = "select user_name, user_img from users where log_id = '" + data + "' "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        okis = con.fetchall()
+        print(okis)
+
+    return render_template('oki.html', okis=result, count=coun, test=okis)
+
+@application.route('/delete/<delete_id>')
+def delete(delete_id=None):
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'delete from fab where tweet_id = "' + delete_id + '" '
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/oki')
+
+@application.route('/pro/<user_pro>')
+def user_pro(user_pro=None):
+
+    data = request.cookies.get("name", None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = "select created_at, tweet_comment, user_name, user_img, tweet.tw_id from tweet inner join users on tweet.user_id = users.log_id where log_id = '" + user_pro + "' "
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    if sql is not False:
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = 'select user_name, user_intro, user_img, log_id from users where log_id = "' + user_pro + '"'
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        user_pro = con.fetchall()
+        print(user_pro)
+
+    return render_template('user_pro.html', user_pro=result, pros=user_pro)
+
+@application.route('/follower')
+def follower():
+
+    count = 1
+    text = 'フォロー中'
+    data = request.cookies.get('name', None)
+    print(data)
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'select user_name, user_img, user_intro, user_id from users inner join follow on users.log_id = follow.user_id where follow_text = "' + text + '" AND follow.log_id = "' + data + '" '
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    if result == ():
+
+        coun = 3
+
+        data = request.cookies.get('name', None)
+        print(data)
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = "select user_name, user_img from users where log_id = '" + data + "' "
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        follow = con.fetchall()
+        print(follow)
+
+        return render_template('follower.html', com='誰かフォローしたら表示されるよ！', tests=follow, count=coun)
+
+    if sql is not False:
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = 'select user_name, user_img from users where log_id = "' + data + '"'
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        test = con.fetchall()
+        print(test)
+
+    return render_template('follower.html', pros=result, tests=test, count=count)
+
+@application.route('/follower/delete/<follower>')
+def follower_delete(follower=follower):
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'delete from follow where user_id = "' + follower + '" '
+    con.execute(sql)
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/follower')
