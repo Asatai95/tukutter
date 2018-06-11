@@ -1,0 +1,57 @@
+@media (max-width: 599px) {
+  #profile_edit {
+    width: 95vw;
+    margin: 0 auto
+  }
+  #profile_edit .logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+  }
+  #profile_edit .logo p {
+    margin-top: 17vw;
+    font-size: 4vw
+  }
+  #profile_edit form .inline {
+    margin-bottom: 5vw
+  }
+  #profile_edit form .inline label {
+    font-size: 4vw;
+    width: 60vw;
+    display: block;
+    margin-bottom: 2vw
+  }
+  #profile_edit form .inline label[for="file"] {
+    font-size: 4vw;
+    display: inline-block;
+    width: 58.5vw;
+    background-color: #707070;
+    border-radius: 0
+  }
+  #profile_edit form .inline label[for="file"].hide {
+    background: none
+  }
+  #profile_edit form .inline input {
+    width: 60vw;
+    height: 8vw;
+    border: solid 1px;
+    font-size: 4vw
+  }
+  #profile_edit form .inline textarea {
+    width: 60vw;
+    height: 16vw;
+    font-size: 4vw
+  }
+  #profile_edit form input[type="submit"] {
+    font-size: 4vw;
+    padding: 1.5vw 22.5vw;
+    margin-top: 7vw
+  }
+  #profile_edit form input[type="submit"]:hover {
+    filter: brightness(80%)
+  }
+  #profile_edit form input[type="submit"]:active {
+    transform: translateY(5px)
+  }
+}

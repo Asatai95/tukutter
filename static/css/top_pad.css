@@ -1,4 +1,8 @@
 @charset "utf-8";
+/*ipad*/
+header {
+  margin-bottom: 40px;
+}
 
 .profile {
   display: inline-block;
@@ -16,45 +20,76 @@
   text-align: center;
 }
 
+/* --- ナビゲーションバー --- */
+
 div.nav {
   width: 100%;
+  /* ナビゲーションの幅 */
   background: #f9f9f9 url(../img/off.gif) repeat-x top;
+  /* ナビゲーションの背景 */
   border-top: 1px #cccccc solid;
+  /* 上境界線 */
   border-bottom: 1px #cccccc solid;
+  /* 下境界線 */
   font-size: 80%;
 }
 
+/* --- メニューエリア --- */
+
 div.nav ul.nl {
   width: 600px;
+  /* メニューの幅 */
   margin: 0 auto;
+  /* センターに配置 */
   padding: 0;
   background: #f9f9f9 url(../img/off.gif) repeat-x top;
+  /* メニューの背景 */
   border-left: 1px #cccccc solid;
+  /* メニューの左境界線 */
   border-right: 1px #ffffff solid;
+  /* メニューの右境界線 */
   list-style-type: none;
   text-align: center;
 }
 
+/* --- メニュー項目 --- */
+
 div.nav ul.nl li {
   width: 20%;
+  /* 項目の幅 */
   float: left;
 }
+
+/* --- リンク --- */
 
 div.nav ul.nl li a {
   display: block;
   position: relative;
+  /* IE6用 */
   padding: 11px 2px;
+  /* リンクエリアのパディング（上下、左右） */
   border-top: 1px #ffffff solid;
+  /* リンクエリアの上境界線 */
   border-bottom: 1px #808080 solid;
+  /* リンクエリアの下境界線 */
   border-left: 1px #ffffff solid;
+  /* リンクエリアの左境界線 */
   border-right: 1px #cccccc solid;
+  /* リンクエリアの右境界線 */
   text-decoration: none;
+  /* テキストの下線（なし） */
 }
+
+/* --- ポイント時の設定 --- */
 
 div.nav ul.nl li a:hover {
   background: #f9f9f9 url(../img/on.gif) repeat-x top;
+  /* ポイント時の背景 */
   text-decoration: underline;
+  /* テキストの下線（あり） */
 }
+
+/* --- clearfix --- */
 
 .clearFix:after {
   content: ".";
@@ -66,58 +101,6 @@ div.nav ul.nl li a:hover {
 
 .clearFix {
   min-height: 1px;
-}
-
-dl.search_box{
-	position: relative;
-	background-color:#fff;
-	border:1px solid #aaa;
-	-webkit-border-radius:6px;
-	-moz-border-radius:6px;
-	-o-border-radius:6px;
-	-ms-border-radius:6px;
-	border-radius:6px;
-}
-
-dl.search_box dt {
-	margin-right:40px;
-	padding:8px 0 8px 8px;
-}
-
-dl.search_box dt input {
-	width:100%;
-	height:24px;
-	line-height:24px;
-	background:none;
-	border:none;
-}
-
-dl.search_box dd {
-	position:absolute;
-	top:0;
-	right:0;
-}
-
-dl.search_box dd button {
-	display:block;
-	background:none;
-	border:none;
-  cursor: pointer;
-  padding-top: 5px;
-}
-
-dl.search_box dd button span {
-	display:block;
-  padding-right: 10px;
-  padding-bottom: 10px;
-	width:20px;
-	height:20px;
-	background:url(../img/megane.png) no-repeat scroll 0 0;
-  background-size: 30px;
-}
-
-input[type="text"] {
-    font-size: 18px;
 }
 
 .stream {
@@ -140,20 +123,19 @@ input[type="text"] {
   height: 6vw;
 }
 
-span {
+p .user-name {
   display: inline-block;
-  font-size: 2vw;
+  font-size: 3vw;
+  margin: 0 0 0 0.5vw;
+  padding-top: 15px;
+  padding-left: 10px;
 }
 
 p .tweet-time {
   font-size: 5px;
   float: right;
-  margin: 0 0 0 5vw;
-  padding-left: 70px;
-}
-
-p .user-name {
-  margin: 0 0 0 0.5vw;
+  display: inline-block;
+  padding-left: 60px;
 }
 
 .inline {
@@ -161,44 +143,36 @@ p .user-name {
 }
 
 .stream-content {
-  width: 100%;
+  width: 85%;
+  padding-left: 20px;
 }
 
 .stream-content p {
   text-align: center;
   padding: 1vw 0.5vw 1vw 0.5vw;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .stream-footer {
-  width: 15%;
-  float: right;
-  margin-right: 5px;
-  margin-bottom: 1vw;
+  width: 100%;
 }
 
-.favorite a img {
-  width: 70%;
+.favorite img {
+  margin: 1vw 3vw;
+  width: 6vw;
+  height: 6vw;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding-left: 30px;
+}
+
+.favorite img :hover {
+  filter: brightness(40%);
 }
 
 .stream.fixed {
   margin-top: 65px;
-}
-
-.erra {
-  text-align: center;
-  font-weight: 400;
-  font-size: 30px;
-  background: white;
-}
-
-.content {
-  margin-top: 30px;
-}
-
-header .profile {
-  display: inline-block;
-  width: 100%;
 }
 
 #top_scroll{
@@ -231,4 +205,36 @@ header .profile {
 
 #top_scroll:hover{
     background: #fff;
+}
+
+#follow img {
+  display: none;
+}
+
+#follow img:first-child {
+  display: inline;
+}
+
+.square_btn {
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #4646ff;
+    border-bottom: solid 2px #1e1eff;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+    font-size: 13px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    float: right;
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+.square_btn:active {
+    border-bottom: solid 2px #4646ff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }

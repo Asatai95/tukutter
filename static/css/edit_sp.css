@@ -33,7 +33,7 @@ div.nav {
 /* --- メニューエリア --- */
 
 div.nav ul.nl {
-  width: 600px;
+  width: 350px;
   /* メニューの幅 */
   margin: 0 auto;
   /* センターに配置 */
@@ -102,7 +102,7 @@ div.nav ul.nl li a:hover {
 .inline_img img {
   width: 50px;
   height: 50px;
-  margin: 0 0 0 80px;
+  margin: 0 0 0 90px;
 }
 
 .inline .file {
@@ -136,8 +136,12 @@ div.nav ul.nl li a:hover {
 #profile_edit form .inline {
   display: inline-block;
   margin-bottom: 1.6vw;
-  height: 50px;
-  width: 380px;
+  height: 40px;
+  width: 262px;
+}
+
+#profile_edit form .inline .userID {
+  margin: 0 0 2px 0;
 }
 
 #userID form .inline {
@@ -148,28 +152,30 @@ div.nav ul.nl li a:hover {
 #profile_edit form .inline_img {
   display: inline-block;
   margin-bottom: 1.8vw;
-  width: 380px;
+  width: 262px;
   height: 90px;
 }
 
-#profile_edit form .inline_img .file {
-  margin-left: 115px;
-  width: 20vw;
-  height: 18px;
-}
-
 #profile_edit form .inline_img label {
-  font-size: 1.5vw;
+  font-size: 2.5vw;
   width: 10vw;
   display: inline-block;
   vertical-align: bottom;
 }
 
 #profile_edit form .inline label {
-  font-size: 1.5vw;
-  width: 120px;
+  font-size: 2.5vw;
+  width: 70px;
   display: inline-block;
   vertical-align: bottom;
+}
+
+#profile_edit form .inline .password {
+  margin: 0 0 2px 0;
+}
+
+#profile_edit form .inline .name {
+  margin: 0 0 1px 0;
 }
 
 #userID form .inline label {
@@ -193,9 +199,9 @@ div.nav ul.nl li a:hover {
 }
 
 #profile_edit form .inline input {
-  font-size: 1.5vw;
-  width: 20vw;
-  height: 1.6vw;
+  font-size: 2.5vw;
+  width: 48vw;
+  height: 3.6vw;
   border: 1px solid;
 }
 
@@ -207,7 +213,9 @@ div.nav ul.nl li a:hover {
 }
 
 #profile_edit form .inline_img .file {
-  margin-left: 125px;
+  margin-left: 76px;
+  width: 48vw;
+  height: 20px;
   cursor: pointer;
 }
 
@@ -216,9 +224,9 @@ div.nav ul.nl li a:hover {
 }
 
 #profile_edit form .inline textarea {
-  font-size: 1.5vw;
-  width: 20vw;
-  height: 6vw;
+  font-size: 2.5vw;
+  width: 47vw;
+  height: 12vw;
   border: 2px solid;
 }
 
@@ -234,7 +242,7 @@ div.nav ul.nl li a:hover {
 
 #profile_edit form input[type="submit"] {
   font-size: 2vw;
-  margin-top: 5vw;
+  margin-top: 7vw;
   display: inline-block;
   text-align: center;
   border: solid 3px black;
@@ -254,12 +262,12 @@ div.nav ul.nl li a:hover {
 }
 
 .error {
-  font-size: 20px;
+  font-size: 13px;
   font-weight: 400;
   text-align: center;
   color: red;
 }
 
 .error p {
-  margin: 10px auto;
+  margin: 5px auto;
 }

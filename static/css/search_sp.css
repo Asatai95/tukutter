@@ -25,7 +25,7 @@ div.nav {
 }
 
 div.nav ul.nl {
-  width: 600px;
+  width: 350px;
   margin: 0 auto;
   padding: 0;
   background: #f9f9f9 url(../img/off.gif) repeat-x top;
@@ -121,7 +121,7 @@ input[type="text"] {
 }
 
 .stream {
-  width: 50vw;
+  width: 60vw;
   margin: 0 auto;
 }
 
@@ -136,8 +136,8 @@ input[type="text"] {
 
 .stream-header img {
   margin: 1vw 1vw;
-  width: 6vw;
-  height: 6vw;
+  width: 8vw;
+  height: 8vw;
 }
 
 span {
@@ -146,13 +146,14 @@ span {
 }
 
 p .tweet-time {
-  font-size: 5px;
+  font-size: 1px;
   float: right;
   margin: 0 0 0 5vw;
-  padding-left: 70px;
+  padding-left: 0;
 }
 
 p .user-name {
+  font-size: 15px;
   margin: 0 0 0 0.5vw;
 }
 

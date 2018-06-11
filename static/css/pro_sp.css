@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 .profile {
   display: inline-block;
   width: 100%;
@@ -34,7 +33,7 @@ div.nav {
 /* --- メニューエリア --- */
 
 div.nav ul.nl {
-  width: 600px;
+  width: 350px;
   /* メニューの幅 */
   margin: 0 auto;
   /* センターに配置 */
@@ -118,7 +117,7 @@ div.nav ul.nl li a:hover {
 }
 
 .profile-header p {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .profile-header p a img {
@@ -164,7 +163,7 @@ a :hover {
 }
 
 .stream {
-  width: 38vw;
+  width: 45vw;
   margin: 0 auto;
 }
 
@@ -194,8 +193,7 @@ span {
 
 p .tweet-time {
   font-size: 0.8vw;
-  float: right;
-  margin: 0 0 0 5vw;
+  float: right
 }
 
 p .user-name {
@@ -230,7 +228,7 @@ p .user-name {
 
 .stream-delete {
   margin-top: 2vw;
-  margin-left: 8vw;
+  margin-left: 7vw;
   margin-bottom: 1vw;
   margin-right: 3vw;
   display: flex;
@@ -298,6 +296,7 @@ a.cp_btn:hover {
   border-radius: 4px;
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
+  font-size: 10px;
 }
 
 .square_btn:active {
