@@ -6,10 +6,10 @@
   <meta name='keywords' content=''>
   <meta name='description' content="">
   <meta name='viewport' content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" media='screen' href="static/css/edit.css">
 
-  <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/edit.css">
-  <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/edit.css">
+  <link rel="stylesheet" media='screen and (min-width:0) and (max-width:375px)' href="static/css/edit_sp.css">
+  <link rel="stylesheet" media='screen and (min-width:376px) and (max-width:768px)' href="static/css/edit_pad.css">
+  <link rel="stylesheet" media='screen and (min-width:769px)' href="static/css/edit.css">
 
 
   <title>編集</title>
@@ -40,13 +40,13 @@
       <p>ユーザー登録</p>
     </div>
     <div class='text'>
-        <div class='erra'>
+        <div class='error'>
           <p>{{error}}</p>
         </div>
     </div>
     <form action="/edit" method="POST" enctype="multipart/form-data">
-      <div class="inline">
-        <label for="userid">image</label>
+      <div class="inline_img">
+        <label id='image' for="userid" class='name'>image</label>
         <img src="{{pro[0]}}" alt="プロフィール画像">
         <input id="img_file" class="file" type="file" name="img_file" value="画像選択">
         <!-- <label for="file" class="view_box">
@@ -55,24 +55,24 @@
         </label> -->
       </div>
 
-      <div class="inline">
-        <label for="userid">userID</label>
+      <div id='userID' class="inline">
+        <label for="userid" class='userID'>userID</label>
         <input type="text" name="userid" value="{{pro[1]}}">
       </div>
-      <div class="inline">
-        <label for="password">password</label>
+      <div id='password' class="inline">
+        <label for="password" class='password'>password</label>
         <input type="password" name="passwd" value="">
       </div>
-      <div class="inline">
-        <label for="password">password確認</label>
+      <div id="password" class="inline">
+        <label for="password" class='password'>password確認</label>
         <input type="password" name="passwd" value="">
       </div>
-      <div class="inline">
-        <label for="password">お名前</label>
+      <div id="name" class="inline">
+        <label for="password" class='name'>お名前</label>
         <input type="text" name="user_name" value="{{pro[2]}}">
       </div>
-      <div class="inline">
-        <label for="password">ひと言</label>
+      <div id='comment' class="inline">
+        <label for="password" class='comment'>ひと言</label>
         <textarea type="text" name="user_intro" value="">{{pro[3]}}</textarea>
       </div>
         {% endfor %}

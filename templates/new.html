@@ -5,10 +5,10 @@
     <meta name='keywords' content=''>
     <meta name='description' content="">
     <meta name='viewport' content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" media='screen' href="static/css/new.css">
 
-    <link rel="stylesheet" media='screen and min-width:1024px)' href="static/css/new.css">
-    <link rel="stylesheet" media='screen and max-width:1023px)' href="static/css/new.css">
+    <link rel="stylesheet" media='screen and (min-width:0) and (max-width:375px)' href="static/css/new_sp.css">
+    <link rel="stylesheet" media='screen and (min-width:376px) and (max-width:768px)' href="static/css/new_pad.css">
+    <link rel="stylesheet" media='screen and (min-width:769px)' href="static/css/new.css">
 
 
     <title>tukutter</title>
@@ -30,12 +30,14 @@
         <p class='profile_img'><img src="static/img/profile.png" alt="プロフィール画像">
         <input id="img_file" class="file" type="file" name="img_file" value="画像選択"></p>
         <p class="submit">
-          <input type="submit" value="登録" />
+          <input type="submit" value="Login" />
         </p>
+        <hr>
     </form>
+    <p class="back">
+      <a href="/login"><input type="submit" value=" Login画面" /></a>
+    </p>
 </div>
-<p class="submit">
-  <a href="/login"><input type="submit" value="戻る" /></a>
-</p>
+
 </body>
 </html>
