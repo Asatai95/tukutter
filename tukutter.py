@@ -164,7 +164,7 @@ def new_db():
             filename = secure_filename(img_file.filename)
             img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
             path = UPLOAD_FOLDER + filename
-            print(path)    
+            print(path)
 
             db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
             con = db.cursor()
