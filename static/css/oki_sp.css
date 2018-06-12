@@ -37,7 +37,7 @@ div.nav {
 /* --- メニューエリア --- */
 
 div.nav ul.nl {
-  width: 350px;
+  width: 330px;
   /* メニューの幅 */
   margin: 0 auto;
   /* センターに配置 */
@@ -50,6 +50,7 @@ div.nav ul.nl {
   /* メニューの右境界線 */
   list-style-type: none;
   text-align: center;
+  font-size: 11px;
 }
 
 /* --- メニュー項目 --- */

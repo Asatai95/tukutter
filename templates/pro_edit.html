@@ -8,8 +8,8 @@
   <meta name='viewport' content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" media='screen and (min-width:0) and (max-width:375px)' href="../../static/css/pro_edit_sp.css">
-  <link rel="stylesheet" media='screen and (min-width:376px) and (max-width:768px)' href="../../static/css/pro_edit.css">
-  <link rel="stylesheet" media='screen and (min-width:769px)' href="../../static/css/user_edit.css">
+  <link rel="stylesheet" media='screen and (min-width:376px) and (max-width:768px)' href="../../static/css/pro_edit_pad.css">
+  <link rel="stylesheet" media='screen and (min-width:769px)' href="../../static/css/pro_edit.css">
 
 
   <title>tukutter</title>
@@ -23,8 +23,14 @@
     <div class="profile">
       <a href="/pro"><img src="../../{{test[1]}}" alt="プロフィール"></a>
       <p>{{test[0]}}</p>
+
+      <div class="back">
+        <a href="/pro"><input type="submit" value="戻る" /></a>
+      </div>
+
     </div>
     {% endfor %}
+
     <div class="nav">
 
       <ul class="nl clearFix">

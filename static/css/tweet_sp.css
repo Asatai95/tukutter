@@ -37,7 +37,7 @@ div.nav {
 /* --- メニューエリア --- */
 
 div.nav ul.nl {
-  width: 350px;
+  width: 330px;
   /* メニューの幅 */
   margin: 0 auto;
   /* センターに配置 */
@@ -50,6 +50,7 @@ div.nav ul.nl {
   /* メニューの右境界線 */
   list-style-type: none;
   text-align: center;
+  font-size: 11px;
 }
 
 /* --- メニュー項目 --- */
@@ -112,7 +113,7 @@ div.nav ul.nl li a:hover {
   border: solid 5px #6091d3;
   border-radius: 10px;
   width: 250px;
-  height: 300px;
+  height: 290px;
   text-align: center;
   background:#EEEEEE;
   background-image: -webkit-linear-gradient(top, #EEEEEE, Courier New);
@@ -134,6 +135,8 @@ textarea {
   height: 200px;
   font-size: 1.3em;
   margin: 10px auto;
+  border: 2px solid;
+  border-color: #6091d3;
 }
 
 .submit {
@@ -156,9 +159,10 @@ textarea {
   font-family: Courier New;
   color: #4169E1;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 18px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .submit input:hover {
@@ -169,4 +173,5 @@ textarea {
   background-image: -o-linear-gradient(top, #E6E6FA, #E6E6FA);
   background-image: linear-gradient(to bottom, #E6E6FA, #E6E6FA);
   text-decoration: none;
+  cursor: pointer;
 }

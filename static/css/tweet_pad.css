@@ -159,6 +159,7 @@ textarea {
   font-size: 25px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .submit input:hover {
@@ -169,4 +170,5 @@ textarea {
   background-image: -o-linear-gradient(top, #E6E6FA, #E6E6FA);
   background-image: linear-gradient(to bottom, #E6E6FA, #E6E6FA);
   text-decoration: none;
+  cursor: pointer;
 }

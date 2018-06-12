@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+header {
+  margin-bottom: 40px;
+}
+
 .profile {
   display: inline-block;
   width: 100%;
@@ -100,158 +104,74 @@ div.nav ul.nl li a:hover {
   min-height: 1px;
 }
 
-.inline_img img {
-  width: 50px;
-  height: 50px;
-  margin: 0 0 0 80px;
-}
-
-.inline .file {
-  margin-top: 120px;
-}
-
-#profile_edit {
-  width: 60vw;
-  margin: 20px auto;
-}
-
-#profile_edit .logo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#profile_edit .logo p {
-  margin: 15px auto;
-  font-size: 3vw;
-}
-
-#profile_edit form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#profile_edit form .inline {
-  display: inline-block;
-  margin-bottom: 1.6vw;
-  height: 50px;
-  width: 380px;
-}
-
-#userID form .inline {
-  width: 337px;
-  height: 90px;
-}
-
-#profile_edit form .inline_img {
-  display: inline-block;
-  margin-bottom: 1.8vw;
-  width: 380px;
-  height: 90px;
-}
-
-#profile_edit form .inline_img .file {
-  margin-left: 115px;
-  width: 20vw;
-  height: 18px;
-}
-
-#profile_edit form .inline_img label {
-  font-size: 1.5vw;
-  width: 10vw;
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-#profile_edit form .inline label {
-  font-size: 1.5vw;
-  width: 120px;
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-#userID form .inline label {
-  width: 100px;
-}
-
-#profile_edit form .inline .comment {
-  margin-bottom: 25px;
-}
-
-#profile_edit form .inline_img label[for="file"] {
-  width: 20vw;
-  color: white;
-  background-color: #707070;
-  padding: 6px;
-  border-radius: 0;
-}
-
-#profile_edit form .inline_img label[for="file"].hide {
-  background: none;
-}
-
-#profile_edit form .inline input {
-  font-size: 1.5vw;
-  width: 20vw;
-  height: 1.6vw;
-  border: 1px solid;
-}
-
-#profile_edit form .inline_img input {
-  font-size: 1.5vw;
-  width: 20vw;
-  height: 1.6vw;
-  border: 1px solid;
-}
-
-#profile_edit form .inline_img .file {
-  margin-left: 125px;
-  cursor: pointer;
-}
-
-#profile_edit form .inline_img input[type="file"].hide {
-  display: none;
-}
-
-#profile_edit form .inline textarea {
-  font-size: 1.5vw;
-  width: 20vw;
-  height: 6vw;
-  border: 2px solid;
-}
-
-#profile_edit form .inline:after {
-  content: "\A";
-  white-space: pre;
-}
-
-#profile_edit form .inline_img:after {
-  content: "\A";
-  white-space: pre;
-}
-
-#profile_edit form input[type="submit"] {
-  font-size: 2vw;
-  margin-top: 5vw;
-  display: inline-block;
+.tweet_box {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: #6091d3;
+  background: #FFF;
+  border: solid 5px #6091d3;
+  border-radius: 10px;
+  width: 300px;
+  height: 305px;
   text-align: center;
-  border: solid 3px black;
-  padding: 0.8vw 11.1vw;
-  border-radius: 0;
-  cursor: pointer;
+  background:#EEEEEE;
+  background-image: -webkit-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -moz-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -ms-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: -o-linear-gradient(top, #EEEEEE, Courier New);
+  background-image: linear-gradient(to bottom, #EEEEEE, Courier New);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
 }
 
-#profile_edit form input[type="submit"]:hover {
-  filter: brightness(80%);
-  cursor: pointer;
+.tweet_box {
+  margin: 20px auto;
+  padding: 0;
 }
 
-#profile_edit form input[type="submit"]:active {
-  transform: translateY(5px);
+textarea {
+  width: 200px;
+  height: 200px;
+  font-size: 1.3em;
+  margin: 10px auto;
+}
+
+.submit {
+  text-align: center;
+}
+
+.submit input {
+  background: #fff;
+  background-image: -webkit-linear-gradient(top, #fff, #fff);
+  background-image: -moz-linear-gradient(top, #fff, #fff);
+  background-image: -ms-linear-gradient(top, #fff, #fff);
+  background-image: -o-linear-gradient(top, #fff, #fff);
+  background-image: linear-gradient(to bottom, #fff, #fff);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  -webkit-box-shadow: 1px 1px 3px #666666;
+  -moz-box-shadow: 1px 1px 3px #666666;
+  box-shadow: 1px 1px 3px #666666;
+  font-family: Courier New;
+  color: #4169E1;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 8px 15px 8px 15px;
+  text-decoration: none;
   cursor: pointer;
+  cursor: hand;
+}
+
+.submit input:hover {
+  background: #E6E6FA;
+  background-image: -webkit-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: -moz-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: -ms-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: -o-linear-gradient(top, #E6E6FA, #E6E6FA);
+  background-image: linear-gradient(to bottom, #E6E6FA, #E6E6FA);
+  text-decoration: none;
 }
 
 .back {
@@ -296,15 +216,4 @@ div.nav ul.nl li a:hover {
   cursor: hand;
   margin: 0 20px;
   text-shadow: 2px 2px 2px black;
-}
-
-.error {
-  font-size: 20px;
-  font-weight: 400;
-  text-align: center;
-  color: red;
-}
-
-.error p {
-  margin: 10px auto;
 }

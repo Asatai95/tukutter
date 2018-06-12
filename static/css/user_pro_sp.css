@@ -14,6 +14,7 @@
 .profile p {
   font-size: 5vw;
   text-align: center;
+  margin-bottom: 0;
 }
 
 /* --- ナビゲーションバー --- */
@@ -33,7 +34,7 @@ div.nav {
 /* --- メニューエリア --- */
 
 div.nav ul.nl {
-  width: 350px;
+  width: 330px;
   /* メニューの幅 */
   margin: 0 auto;
   /* センターに配置 */
@@ -46,6 +47,7 @@ div.nav ul.nl {
   /* メニューの右境界線 */
   list-style-type: none;
   text-align: center;
+  font-size: 11px;
 }
 
 /* --- メニュー項目 --- */
@@ -100,7 +102,7 @@ div.nav ul.nl li a:hover {
 }
 
 .profilecard {
-  width: 38vw;
+  width: 45vw;
   margin: 3vw auto;
   padding: 1vw;
   background-color: #EEEEEE;
@@ -153,7 +155,7 @@ a :hover {
 }
 
 .stream {
-  width: 38vw;
+  width: 53vw;
   margin: 0 auto;
 }
 
@@ -164,6 +166,10 @@ a :hover {
 
 .stream-header {
   display: flex;
+}
+
+.stream-header p {
+  margin: 0 0 0 0;
 }
 
 .stream-header img {
@@ -182,6 +188,10 @@ p .user-name {
   margin-left: 3vw;
   font-size: 3vw;
   word-break: break-all
+}
+
+.stream-header .user-name {
+  margin-top: 11px;
 }
 
 span {
@@ -275,4 +285,48 @@ span .follow {
 .square_btn:active {
     border-bottom: solid 2px #4646ff;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
+.back {
+  float: right;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+.back input {
+  background: #0099FF;
+  background-image: -webkit-linear-gradient(top, #0099FF, #0099FF);
+  background-image: -moz-linear-gradient(top, #0099FF, #0099FF);
+  background-image: -ms-linear-gradient(top, #0099FF, #0099FF);
+  background-image: -o-linear-gradient(top, #0099FF, #0099FF);
+  background-image: linear-gradient(to bottom, #0099FF, #0099FF);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  -webkit-box-shadow: 1px 1px 3px #666666;
+  -moz-box-shadow: 1px 1px 3px #666666;
+  box-shadow: 1px 1px 3px #666666;
+  font-family: Courier New;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 6px 10px 6px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  cursor: hand;
+  margin: 0 10px;
+  font-size: 10px;
+}
+
+.back input:hover {
+  background: #6699FF;
+  background-image: -webkit-linear-gradient(top, #6699FF, #6699FF);
+  background-image: -moz-linear-gradient(top, #6699FF, #6699FF);
+  background-image: -ms-linear-gradient(top, #6699FF, #6699FF);
+  background-image: -o-linear-gradient(top, #6699FF, #6699FF);
+  background-image: linear-gradient(to bottom, #6699FF, #6699FF);
+  text-decoration: none;
+  cursor: pointer;
+  cursor: hand;
+  margin: 0 10px;
+  text-shadow: 2px 2px 2px black;
 }

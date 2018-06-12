@@ -25,7 +25,7 @@ div.nav {
 }
 
 div.nav ul.nl {
-  width: 350px;
+  width: 330px;
   margin: 0 auto;
   padding: 0;
   background: #f9f9f9 url(../img/off.gif) repeat-x top;
@@ -33,6 +33,7 @@ div.nav ul.nl {
   border-right: 1px #ffffff solid;
   list-style-type: none;
   text-align: center;
+  font-size: 11px;
 }
 
 div.nav ul.nl li {
