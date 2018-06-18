@@ -27,10 +27,11 @@
     {% for test in tests%}
     <div class="profile">
       <a href="/pro"><img src="{{test[1]}}" alt="プロフィール"></a>
+      <a href="/" class='tukutter'><img src="static/img/test.png" alt="" style="margin-top: 20px;"></a>
       <p>{{test[0]}}</p>
 
       <div class="back">
-        <a href="/pro"><input type="submit" value="戻る" /></a>
+        <a href="javascript:history.back();"><input type="submit" value="戻る" /></a>
       </div>
 
     </div>

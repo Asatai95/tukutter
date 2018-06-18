@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+.tukutter {
+  float: right;
+  display: block;
+  width: 70px;
+}
+
 header {
   margin-bottom: 40px;
 }

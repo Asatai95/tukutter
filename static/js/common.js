@@ -14,3 +14,27 @@ $(function(){
         }
       });
     });
+//
+// $(function(){
+//   var test = "http://localhost:8080/oki/{%row[0]%}";
+//   $('#link').live("click", function(event){
+//
+//       $.ajax({
+//         url: test,
+//        });
+//
+//         event.preventDefault();
+//    });
+//
+//   });
+
+// $(function(){
+//   $('#link').on('click', function(e){
+//     $('#link img').attr('src', 'static/img/fab_out.png');
+//     e.preventDefault();
+//   });
+//   $('#link').off('click', function(e){
+//     $('#link img[src="static/img/fab_out.png"]').attr('src', 'static/img/logo-pic.png');
+//     e.preventDefault();
+//   });
+// });

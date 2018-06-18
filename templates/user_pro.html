@@ -26,10 +26,11 @@
     {% for pro in pros %}
     <div class="profile">
       <img src="../{{pro[2]}}" alt="プロフィール">
+      <a href="/" class='tukutter'><img src="../static/img/test.png" alt="" style="margin-top: 20px;"></a>
       <p>{{pro[0]}}</p>
 
       <div class="back">
-        <a href="/"><input type="submit" value="戻る" /></a>
+        <a href="javascript:history.back();"><input type="submit" value="戻る" /></a>
       </div>
 
     </div>

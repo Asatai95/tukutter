@@ -26,6 +26,7 @@
   <header>
     <div class="profile">
       <a href="/pro"><img src="{{top[1]}}" alt="プロフィール"></a>
+      <a href="/" class='tukutter'><img src="static/img/test.png" alt="" style="margin-top: 20px;"></a>
       <p>{{top[0]}}</p>
     </div>
   {% endfor %}
@@ -39,8 +40,8 @@
         <li><a href="/logout">ログアウト</a></li>
       </ul>
   </header>
-
   </div>
+ <div class='main'>
   {% for row in rows %}
   <div class="stream">
     <div class="content">
@@ -74,6 +75,7 @@
    </footer>
 
     {% endfor %}
+  </div>
 
 </body>
 

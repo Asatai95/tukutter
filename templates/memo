@@ -17,3 +17,61 @@ def profile_db():
     print(result)
 
     return render_template('pro.html', rows=result)
+
+
+    <form id='pay-form' method="POST" action='/pay'>
+      <div class='content'>
+        <div class='main'>
+          <p>カード情報</p>
+          <label for="cord-name">カード名義人</label>
+          <input id='cord-name' name='cordname' type="text"><br><br>
+
+          <label for="cord-info">カード情報</label>
+          <input id='cord-info' name='cordinfo' type="tel" size='20' maxlength="20"><br><br>
+
+          <label for="cord-time">有効期限</label>
+          <select name="cordtime" id="cord-time">
+            <option value="1" selected='selected'>01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select> /
+
+          <select id="cord-year" name="cordyear">
+            <option value="2018" selected='selected'>2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+          </select><br><br>
+
+          <label for="cord-type" class='type'>クレジットカード会社の選択</label>
+            <select id="cord-type" name="cordtype">
+              <option value="">クレジットカード会社の選択</option>
+              <option value="v">VISA</option>
+              <option value="m">MasterCard</option>
+              <option value="J">JCB</option>
+              <option value="A">American</option>
+
+            </select><br>
+
+            <p class='submit'>
+              <input type='submit' value='決済' / >
+            </p>
+        </div>
+
+      </div>
+    </form>

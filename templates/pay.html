@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="static/img/twitter.png">
+  <link rel="stylesheet" href="static/css/pay.css">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/common.js"></script>
+  <script type="text/javascript" src="static/js/card.js"></script>
+
+
+  <title>Tukutter</title>
+
+</head>
+<body>
+  <div class='comment'>
+    <img src="static/img/test.png" alt="">
+    <div class='comment-form'>
+      <p>必要なカード情報を入力してください。</p>
+    </div>
+    <div class='error'>
+      <p>{{error}}</p>
+    </div>
+
+  </div>
+  <div id='form'>
+    <p class="pay-form">クレジットカード<br>入力フォーム</p>
+   <div class="container">
+     <div class="card-wrapper"></div>
+      <div class="form-container active">
+          <form action="/pay" method="POST">
+              <input placeholder="Card number" type="text" name="number" maxlength="20">
+              <input placeholder="Full name" type="text" name="cardname" maxlength="15">
+              <input placeholder="MM/YY" type="text" name="expiry">
+              <input placeholder="CVC" type="text" name="cvc">
+               <p class='submit'>
+                 <input type="submit" value='決済'>
+               </p>
+          </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('.active form').card({
+        container: $('.card-wrapper')
+    })
+  </script>
+
+  <footer>
+
+  </footer>
+
+</body>
+
+</html>

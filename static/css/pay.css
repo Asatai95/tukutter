@@ -1,38 +1,22 @@
 @charset "utf-8";
 
-.tukutter {
-  float: right;
-  display: block;
-  width: 180px;
-}
-
 body {
-  background-image: url("../img/map.jpeg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  background-position: 0 50px;
-}
-
-header {
-  margin-bottom: 40px;
-}
-
-.profile {
-  display: inline-block;
-  width: 100%;
-}
-
-.profile img {
-  position: absolute;
-  width: 15%;
-  margin: 1vw 1vw;
-}
-
-.profile p {
-  font-size: 5vw;
+  margin: 20px auto;
   text-align: center;
-  margin-bottom: 10px;
+}
+
+.main {
+  text-align: center;
+}
+
+.error {
+  font-weight: 800;
+  font-size: 20px;
+  color: red;
+}
+
+.error p {
+  margin-top: 0;
 }
 
 /* --- ナビゲーションバー --- */
@@ -118,18 +102,65 @@ div.nav ul.nl li a:hover {
   min-height: 1px;
 }
 
-.tweet_box {
-  padding: 0.5em 1em;
-  margin: 2em 0;
-  font-weight: bold;
-  color: #6091d3;
-  background: #FFF;
-  border: solid 5px #6091d3;
-  border-radius: 10px;
-  width: 300px;
-  height: 305px;
+.container {
+    width: 100%;
+    max-width: 350px;
+    margin: 30px auto;
+}
+
+.comment-form p {
   text-align: center;
-  background:#EEEEEE;
+  font-size: 23px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.comment img {
+  margin: 20px auto;
+  height: 100px;
+  width: 500px;
+}
+
+form {
+    margin: 30px;
+}
+
+input {
+    width: 250px;
+    margin: 10px auto;
+    display: block;
+    font-size: 20px;
+}
+
+#form {
+    width: 350px;
+    height: 570px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 3px solid #555;
+}
+
+.pay-form {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom:solid 3px #555;
+    text-shadow: 2px 2px 0 #CCCCCC;
+    margin-top: 0;
+    padding-bottom: 10px;
+}
+
+.submit{
+    text-align: center;
+    margin: 20px 0 0 0;
+}
+
+input .submit {
+  margin: 0 20px;
+}
+
+#form {
+  background: #EEEEEE;
   background-image: -webkit-linear-gradient(top, #EEEEEE, Courier New);
   background-image: -moz-linear-gradient(top, #EEEEEE, Courier New);
   background-image: -ms-linear-gradient(top, #EEEEEE, Courier New);
@@ -137,64 +168,14 @@ div.nav ul.nl li a:hover {
   background-image: linear-gradient(to bottom, #EEEEEE, Courier New);
   -webkit-border-radius: 6;
   -moz-border-radius: 6;
-}
-
-.tweet_box {
-  margin: 20px auto;
-  padding: 0;
-}
-
-textarea {
-  width: 200px;
-  height: 200px;
-  font-size: 1.3em;
-  margin: 10px auto;
-}
-
-.submit {
-  text-align: center;
+  border-radius: 6px;
+  font-family: Courier New;
+  font-size: 20px;
+  padding: 20px 20px 20px 20px;
+  text-decoration: none;
 }
 
 .submit input {
-  background: #fff;
-  background-image: -webkit-linear-gradient(top, #fff, #fff);
-  background-image: -moz-linear-gradient(top, #fff, #fff);
-  background-image: -ms-linear-gradient(top, #fff, #fff);
-  background-image: -o-linear-gradient(top, #fff, #fff);
-  background-image: linear-gradient(to bottom, #fff, #fff);
-  -webkit-border-radius: 8;
-  -moz-border-radius: 8;
-  border-radius: 8px;
-  -webkit-box-shadow: 1px 1px 3px #666666;
-  -moz-box-shadow: 1px 1px 3px #666666;
-  box-shadow: 1px 1px 3px #666666;
-  font-family: Courier New;
-  color: #4169E1;
-  font-weight: 800;
-  font-size: 20px;
-  padding: 8px 15px 8px 15px;
-  text-decoration: none;
-  cursor: pointer;
-  cursor: hand;
-}
-
-.submit input:hover {
-  background: #E6E6FA;
-  background-image: -webkit-linear-gradient(top, #E6E6FA, #E6E6FA);
-  background-image: -moz-linear-gradient(top, #E6E6FA, #E6E6FA);
-  background-image: -ms-linear-gradient(top, #E6E6FA, #E6E6FA);
-  background-image: -o-linear-gradient(top, #E6E6FA, #E6E6FA);
-  background-image: linear-gradient(to bottom, #E6E6FA, #E6E6FA);
-  text-decoration: none;
-}
-
-.back {
-  float: right;
-  margin-bottom: 10px;
-  margin-right: 50px;
-}
-
-.back input {
   background: #0099FF;
   background-image: -webkit-linear-gradient(top, #0099FF, #0099FF);
   background-image: -moz-linear-gradient(top, #0099FF, #0099FF);
@@ -210,15 +191,14 @@ textarea {
   font-family: Courier New;
   color: #ffffff;
   font-size: 16px;
-  padding: 10px 15px 10px 15px;
+  padding: 5px 10px 5px 10px;
   text-decoration: none;
   cursor: pointer;
-  cursor: hand;
-  margin: 0 20px;
-  font-size: 15px;
+  margin: 0 auto;
+  width: 150px;
 }
 
-.back input:hover {
+.submit input:hover {
   background: #6699FF;
   background-image: -webkit-linear-gradient(top, #6699FF, #6699FF);
   background-image: -moz-linear-gradient(top, #6699FF, #6699FF);
@@ -228,6 +208,6 @@ textarea {
   text-decoration: none;
   cursor: pointer;
   cursor: hand;
-  margin: 0 20px;
+  margin: 0 auto;
   text-shadow: 2px 2px 2px black;
 }

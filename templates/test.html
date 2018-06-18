@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/css/test.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/card.js"></script>
+
+
+
+</head>
+
+<div class="container">
+    <div class="card-wrapper"></div>
+    <div class="form-container active">
+        <form action="/test">
+            <input placeholder="Card number" type="text" name="number" maxlength='16'>
+            <input placeholder="Full name" type="text" name="name">
+            <input placeholder="MM/YY" type="text" name="expiry">
+            <input placeholder="CVC" type="text" name="cvc">
+        </form>
+    </div>
+</div>
+<script>
+  $('.active form').card({
+      container: $('.card-wrapper')
+  })
+</script>
+</body>
+</html>

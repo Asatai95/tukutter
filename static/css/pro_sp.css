@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+.tukutter {
+  float: right;
+  display: block;
+  width: 70px;
+}
+
 .profile {
   display: inline-block;
   width: 100%;

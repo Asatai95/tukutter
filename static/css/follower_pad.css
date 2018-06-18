@@ -1,7 +1,20 @@
 @charset "utf-8";
 
+.tukutter {
+  float: right;
+  display: block;
+  width: 180px;
+}
+
+body {
+  background-image: url("../img/map.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-position: 0 50px;
+}
+
 .profile {
-  display: inline-block;
   width: 100%;
 }
 

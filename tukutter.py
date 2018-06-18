@@ -47,29 +47,6 @@ def top_db():
 
     return render_template('top.html', rows=result, tops=top)
 
-@application.route('/follow/<follow_id>')
-def top(follow_id=None):
-
-    data = request.cookies.get('name', None)
-    print(data)
-    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
-    print(time_stamp)
-    text = 'フォロー中'
-
-    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
-    con = db.cursor()
-    print('test')
-
-    sql = 'insert into follow(log_id, user_id, follow_time, follow_text) values(%s, %s, %s, %s) on duplicate key update user_id = "' + follow_id + '", log_id = "' + data + '", id=LAST_INSERT_ID(id) '
-    con.execute(sql, [data, follow_id, time_stamp, text])
-    db.commit()
-    print(sql)
-
-    result = con.fetchall()
-    print(result)
-
-    return redirect('http://localhost:8080/follower')
-
 @application.route('/login')
 def login():
 
@@ -289,7 +266,7 @@ def search():
     con = db.cursor()
     print('???')
 
-    sql = "select tweet_comment, created_at, user_name, user_img, log_id from tweet inner join users on tweet.user_id = users.log_id where log_id != '" + data + "'"
+    sql = "select tweet_comment, created_at, user_name, user_img, tw_id from tweet inner join users on tweet.user_id = users.log_id where log_id != '" + data + "'"
     con.execute(sql)
     db.commit()
     print(sql)
@@ -531,12 +508,14 @@ def edit_db():
 
 
     if img_file and allowed_file(img_file.filename):
-       filename = secure_filename(img_file.filename)
-       img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-       path = UPLOAD_FOLDER + filename
-       print(path)
+
+        filename = secure_filename(img_file.filename)
+        img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+        path = UPLOAD_FOLDER + filename
+        print(path)
 
     else:
+
 
         path = './static/img/profile.png'
 
@@ -761,6 +740,29 @@ def follower():
 
     return render_template('follower.html', pros=result, tests=test, count=count)
 
+@application.route('/follow/<follow_id>')
+def top(follow_id=None):
+
+    data = request.cookies.get('name', None)
+    print(data)
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    print(time_stamp)
+    text = 'フォロー中'
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('test')
+
+    sql = 'insert into follow(log_id, user_id, follow_time, follow_text) values(%s, %s, %s, %s) on duplicate key update user_id = "' + follow_id + '", log_id = "' + data + '", id=LAST_INSERT_ID(id) '
+    con.execute(sql, [data, follow_id, time_stamp, text])
+    db.commit()
+    print(sql)
+
+    result = con.fetchall()
+    print(result)
+
+    return redirect('http://localhost:8080/follower')
+
 @application.route('/follower/delete/<follower>')
 def follower_delete(follower=follower):
 
@@ -777,3 +779,66 @@ def follower_delete(follower=follower):
     print(result)
 
     return redirect('http://localhost:8080/follower')
+
+@application.route('/pay')
+def pay():
+
+    return render_template('pay.html')
+
+@application.route('/pay', methods=['POST'])
+def pay_db():
+
+    number = request.form['number']
+    print(number)
+    cardname = request.form['cardname']
+    print(cardname)
+    expiry = request.form['expiry']
+    print(expiry)
+    cvc = request.form['cvc']
+    print(cvc)
+    time_stamp = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    if number == ('') and cardname == ('') and expiry == ('') and cvc == (''):
+        error = 'すべての項目に適切の内容を入力してください！'
+        return render_template('pay.html', error=error)
+    elif number == (''):
+        error = '正しくカード番号を入力してください！'
+        return render_template('pay.html', error=error)
+    elif cardname == (''):
+        error = 'カード保有者の名前を入力してください！'
+        return render_template('pay.html', error=error)
+    elif expiry == (''):
+        error = 'mm/yyを入力してください！'
+        return render_template('pay.html', error=error)    
+    elif cvc == (''):
+        error = 'cvcを入力してください！'
+        return render_template('pay.html', error=error)
+    elif number.startswith('4') or number.startswith('5') or number.startswith('35') or number.startswith('37') or number.startswith('2222'):
+
+        print('test')
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = 'insert into credit(cardnumber, card_name, mmyy, cvc, created_at) values(%s, %s, %s, %s, %s) on duplicate key update cardnumber = "' + number + '", card_name = "' + cardname + '", id=LAST_INSERT_ID(id)'
+        con.execute(sql, [number, cardname, expiry, cvc, time_stamp])
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        return redirect('http://localhost:8080/info')
+    else:
+        error = '正しいカード番号を入力してください！'
+        return render_template('pay.html', error=error)
+
+@application.route('/info')
+def info():
+
+    return render_template('info.html')
+
+@application.route('/yuryou')
+def test():
+
+    return render_template('yuryou.html')
