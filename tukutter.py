@@ -809,7 +809,7 @@ def pay_db():
         return render_template('pay.html', error=error)
     elif expiry == (''):
         error = 'mm/yyを入力してください！'
-        return render_template('pay.html', error=error)    
+        return render_template('pay.html', error=error)
     elif cvc == (''):
         error = 'cvcを入力してください！'
         return render_template('pay.html', error=error)
@@ -828,7 +828,7 @@ def pay_db():
         result = con.fetchall()
         print(result)
 
-        return redirect('http://localhost:8080/info')
+        return redirect('http://localhost:8080/check')
     else:
         error = '正しいカード番号を入力してください！'
         return render_template('pay.html', error=error)
@@ -842,3 +842,27 @@ def info():
 def test():
 
     return render_template('yuryou.html')
+
+@application.route('/check')
+def check():
+
+    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+    print('???')
+
+    sql = 'delete from credit where cardnumber not in (select card_number from test where credit.cardnumber = test.card_number and credit.id=LAST_INSERT_ID(credit.id))'
+    test = con.execute(sql)
+    db.commit()
+    print(sql)
+    print(test)
+
+    if test == 1:
+
+        return render_template('pay.html', error='存在しないカードアカウントです。')
+
+    else:
+
+        result = con.fetchall()
+        print(result)
+
+        return render_template('check.html')

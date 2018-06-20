@@ -17,7 +17,11 @@ p {
 }
 
 .main {
-  margin-top:90px;
+  margin-top: 40px;
+}
+
+.main img {
+  margin: 0 0 10px 0;
 }
 
 .info {
@@ -26,5 +30,5 @@ p {
 }
 
 .image img {
-  margin: 40px auto;
+  margin: 30px auto;
 }

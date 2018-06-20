@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+body {
+  background: url("../img/map.jpeg");
+  background-repeat: no-repeat;
+  background-size : 100% 100%;
+  margin: 30px auto;
+}
+
+p {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 800;
+  font-family: serif;
+  text-shadow: 2px 2px #DDDDDD;
+}
+
+.load {
+  margin: 10px 0 0 0;
+}
+
+.main {
+  text-align: center;
+  margin: 30px auto;
+}
