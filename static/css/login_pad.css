@@ -2,6 +2,9 @@
 
 body {
   margin: 0;
+  background-image: url('../img/map.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 p {
@@ -22,9 +25,10 @@ input {
 
 #form{
     width: 350px;
-    margin: 30px auto;
+    margin: 60px auto;
     padding: 20px;
     border: 1px solid #555;
+    margin-bottom: 20px;
 }
 
 form p {
@@ -132,4 +136,60 @@ input[type="password"] {
   font-size: 16px;
   color: red;
   margin-bottom: 10px;
+}
+
+.passwd_remake {
+  font-weight: 400;
+  font-size: 16px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.check {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #EEEEEE;
+  opacity: 0.8;
+}
+
+.info img.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 120px;
+}
+
+.info img {
+  width: 200px;
+  margin: 25px 25px 0 25px;
+}
+
+.info h2 {
+  text-align: right;
+  margin-right: 10px;
+  font-size: 13px;
+  float: right;
+  margin-top: 40px;
+}
+
+footer p {
+  text-align: left;
+  margin-right: 0;
+  margin-left: 70px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 15px;
+  padding: 0;
+  width: 150px;
 }

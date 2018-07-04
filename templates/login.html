@@ -33,8 +33,11 @@
         <p>{{error_login}}</p>
       </div>
     </div>
+    <div class='passwd_remake'>
+      <p>{{result}}</p>
+    </div>
 
-    <form action="/login" method="POST">
+    <form action="/" method="POST">
       <p>ログインID</p>
       <p class="login"><input type="text" name="log_id" maxlength="32" autocomplete="OFF" /></p>
       <p>パスワード</p>
@@ -46,6 +49,21 @@
       <a href="/yuryou"><p class="submit"><input type="submit" value="アカウントがない人は登録" /></p></a>
 
   </div>
+  <div class='forgot'>
+    <div class='check'>
+      <a href="/forgot"><p>パスワードを忘れましたか？</p></a>
+    </div>
+  </div>
+
+  <footer>
+    <div class='info'>
+      <img src="static/img/test.png" alt="＠Tukutter株式会社" class="test" >
+      <img src="static/img/footer.png" alt="" class="world" >
+      <h2>Tukutter@つぶやきで世界は繋がる</h2>
+    </div>
+    <p class='company'>＠株式会社Tukutter</p>
+  </footer>
+
 </body>
 
 </html>

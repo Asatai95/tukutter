@@ -1,0 +1,46 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name='keywords' content=''>
+  <meta name='description' content="">
+  <meta name='viewport' content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="static/img/twitter.png">
+  <link rel="stylesheet" href="static/css/forgot.css">
+
+  <title>Tukutter</title>
+
+</head>
+<body>
+  <div class='main'>
+    <img src="static/img/test.png" alt="">
+    <div>
+      <form action="/forgot" method='POST' class='content'>
+        <div class='check'>
+          <p class='text'>現在のアカウント確認</p>
+          <p class='text_top'>ご自身のログインIDを入力してください。<br>新しいパスワードを作成するために必要な項目です。</p>
+          <hr>
+        <div class='login_content'>
+          <div class='error'>
+            <p>{{error}}</p>
+          </div>
+          <p class='login_text'>ログインID</p>
+          <p class='login'><input type="text" maxlength='32' name='log_id' autocomplete='OFF'></p>
+        </div>
+        <p class='submit'><input type="submit" value="新しいパスワード作成へ"></p>
+       </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+<footer>
+  <div class='info'>
+    <img src="static/img/test.png" alt="＠Tukutter株式会社" class="test" >
+    <img src="static/img/footer.png" alt="" class="world" >
+    <h2>Tukutter@つぶやきで世界は繋がる</h2>
+  </div>
+  <p class='company'>＠株式会社Tukutter</p>
+</footer>
+
+</html>

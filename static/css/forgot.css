@@ -1,69 +1,60 @@
-@charset "utf-8";
+@charset "UTF-8";
 
 body {
-  margin: 0;
+  margin: 20px 0 0 0;
+  background-image: url('../img/map.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-p {
-  margin: 5px 0;
+.main {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
 }
 
-form {
-  margin: 0;
+.text {
+  font-size: 18px;
+  border-bottom: solid 3px white;
 }
 
-input {
-  margin: 0 10px;
+.text_top {
+  margin-bottom: 10px;
 }
 
-#form{
-    width: 300px;
-    margin: 30px auto;
-    padding: 20px;
-    border: 1px solid #555;
+.main img {
+  margin: 30px auto;
 }
 
-form p {
-    font-size: 14px;
-    text-shadow: 1px 1px 0 #000;
+.check {
+  text-shadow: 1px 1px black;
 }
 
-.form-title{
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 20px;
-    border-bottom:solid 3px #fff;
-    text-shadow: 3px 3px 0 #000;
+.login_content {
+  margin-top: 30px;
+}
+
+.login_text {
+  margin: 0 auto;
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 
 .login {
-    margin-bottom: 20px;
+  margin: 0 auto;
 }
 
-/*.password {
-    margin-bottom: 20px;
-}*/
-
-input[type="text"],
-input[type="password"] {
-    width: 290px;
-    padding: 4px;
-    font-size: 14px;
-    margin: 0 auto;
+input[type='text'] {
+  width: 335px;
+  padding: 4px;
+  font-size: 13px;
 }
 
-.submit{
-    text-align: center;
-    margin: 15px 0;
+.submit {
+  margin: 45px 0 10px 0;
 }
 
-input .submit {
-  margin: 0 20px;
-}
-
-/* skin */
-
-#form{
+.content {
   background:#c0c0c0;
   background-image: -webkit-linear-gradient(top, #c0c0c0, Courier New);
   background-image: -moz-linear-gradient(top, #c0c0c0, Courier New);
@@ -78,6 +69,10 @@ input .submit {
   font-size: 20px;
   padding: 20px 20px 20px 20px;
   text-decoration: none;
+  width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #555;
 }
 
 .submit input {
@@ -95,7 +90,7 @@ input .submit {
   box-shadow: 1px 1px 3px #666666;
   font-family: Courier New;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 13px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   cursor: pointer;
@@ -114,58 +109,7 @@ input .submit {
   cursor: pointer;
   cursor: hand;
   margin: 0 20px;
-
   text-shadow: 2px 2px 2px black;
-}
-
-#form{
-  background: #c0c0c0;
-  background-image: -webkit-linear-gradient(top, #c0c0c0, Courier New);
-  background-image: -moz-linear-gradient(top, #c0c0c0, Courier New);
-  background-image: -ms-linear-gradient(top, #c0c0c0, Courier New);
-  background-image: -o-linear-gradient(top, #c0c0c0, Courier New);
-  background-image: linear-gradient(to bottom, #c0c0c0, Courier New);
-  -webkit-border-radius: 6;
-  -moz-border-radius: 6;
-  border-radius: 6px;
-  font-family: Courier New;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 20px 20px 20px 20px;
-  text-decoration: none;
-}
-
-#form .error {
-  text-align: center;
-  color: red;
-  margin: 15px 0;
-  font-weight: 400;
-}
-
-#form .log_error {
-  text-align: center;
-  color: red;
-  margin: 15px 0;
-  font-weight: 400;
-  font-size: 19px;
-}
-
-#form .profile_img img {
-  width: 20%;
-  height: 20%;
-}
-
-#form .profile_img {
-  margin-bottom: 30px;
-}
-
-.file {
-  cursor: pointer;
-  cursor: hand;
-}
-
-.submit a {
-  float: right;
 }
 
 footer {
@@ -209,4 +153,12 @@ footer p {
   font-size: 15px;
   padding: 0;
   width: 150px;
+}
+
+.error {
+  margin: 0 auto;
+  font-size: 18px;
+  color: red;
+  font-weight: 600;
+  text-shadow: none;
 }

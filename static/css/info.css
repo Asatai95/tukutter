@@ -8,7 +8,6 @@ body {
 html {
   height: 70%;
   width: 100%;
-  text-align: center;
 }
 
 p {
@@ -18,6 +17,7 @@ p {
 
 .main {
   margin-top: 40px;
+  text-align: center;
 }
 
 .main img {
@@ -29,6 +29,54 @@ p {
   font-weight: 800;
 }
 
+.image {
+  text-align: center;
+}
+
 .image img {
   margin: 30px auto;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #EEEEEE;
+  opacity: 0.8;
+}
+
+.text img.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 120px;
+}
+
+.text img {
+  width: 200px;
+  margin: 25px 25px 0 25px;
+  text-align: left;
+}
+
+.text h2 {
+  text-align: right;
+  margin-right: 10px;
+  font-size: 13px;
+  float: right;
+  margin-top: 40px;
+}
+
+footer p {
+  text-align: left;
+  margin-right: 0;
+  margin-left: 70px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 15px;
+  padding: 0;
+  width: 150px;
 }

@@ -17,7 +17,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@application.route('/')
+@application.route('/tukutter')
 def top_db():
 
     data = request.cookies.get('name', None)
@@ -47,13 +47,12 @@ def top_db():
 
     return render_template('top.html', rows=result, tops=top)
 
-@application.route('/login')
+@application.route('/')
 def login():
-
 
     return render_template('login.html')
 
-@application.route('/login', methods=['POST'])
+@application.route('/', methods=['POST'])
 def login_db():
 
     log = request.form['log_id']
@@ -94,8 +93,134 @@ def login_db():
 
             print('top.html')
 
-            resp = make_response(redirect('http://localhost:8080/'))
+            resp = make_response(redirect('http://localhost:8080/tukutter'))
             resp.set_cookie('name' , log)
+            print(resp)
+
+            return resp
+
+@application.route('/forgot')
+def forgot():
+
+    return render_template('forgot.html')
+
+@application.route('/forgot', methods=['POST'])
+def forgot_db():
+
+    log_id = request.form['log_id']
+    print(log_id)
+
+    db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+    con = db.cursor()
+
+    sql = 'select log_id from users where log_id = "' + log_id + '" '
+    test = con.execute(sql)
+    db.commit()
+    print(sql)
+    print(test)
+
+    if test == 0:
+
+        error = '存在しないログインIDです。'
+
+        return render_template('forgot.html', error=error)
+
+    else:
+
+        result = con.fetchall()
+        print(result)
+
+        resp = make_response(redirect('http://localhost:8080/remake'))
+        resp.set_cookie('name' , log_id)
+        print(resp)
+
+    return resp
+
+@application.route('/remake')
+def remake():
+
+    return render_template('remake.html')
+
+@application.route('/remake', methods=['POST'])
+def remake_db():
+
+    data = request.cookies.get('name', None)
+    passwd = request.form['passwd']
+    passwd_again = request.form['passwd_again']
+    print(passwd)
+    print(passwd_again)
+    print(data)
+
+    if passwd == (''):
+
+        error = 'パスワードを入力してください。'
+
+        return render_template('remake.html', error=error)
+
+    elif passwd_again == (''):
+
+        error = '確認用のパスワードも入力してください。'
+
+        return render_template('remake.html', error=error)
+
+    elif passwd != passwd_again:
+
+        error = '項目に同じパスワード値を入力してください。'
+
+        return render_template('remake.html', error=error)
+
+    elif len(passwd) <= 8 and len(passwd_again) <= 8:
+
+        error = ('パスワードは8文字以上16文字以内で入力してください。')
+
+        return render_template('remake.html', error=error)
+
+    elif len(passwd) > 16:
+
+        error = 'パスワードは16文字以内で入力してください。'
+
+        return render_template('remake.html', error=error)
+
+    elif passwd == passwd_again:
+
+        print(data)
+
+        db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+
+        sql = 'select passwd from users where log_id = "' + data + '" '
+        passwd_check = con.execute(sql)
+        db.commit()
+        print(passwd_check)
+        print('test')
+
+        result = con.fetchall()
+        task = result[0][0]
+        print(result)
+        print('test')
+
+        if task == passwd and task == passwd_again:
+
+            error = 'すでに使用されているパスワードです。'
+
+            return render_template('remake.html', error=error)
+
+        else:
+
+            db = MySQLdb.connect( user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+            con = db.cursor()
+
+            sql = 'update users set passwd = "' + passwd + '" where log_id = "' + data + '" '
+            commit = con.execute(sql)
+            db.commit()
+            print(sql)
+            print(commit)
+
+            result = con.fetchall()
+            print(result)
+
+            resp = make_response(redirect('http://localhost:8080/'))
+            resp.set_cookie('','')
             print(resp)
 
             return resp
@@ -103,7 +228,7 @@ def login_db():
 @application.route('/logout')
 def logout():
 
-    resp = make_response(redirect('http://localhost:8080/login'))
+    resp = make_response(redirect('http://localhost:8080/'))
     resp.set_cookie('', '')
     print(resp)
 
@@ -128,12 +253,21 @@ def new_db():
 
     if log_id == ('') and passwd == ('') and user_name == (''):
         return render_template("new.html", error='全ての内容を入力してください。')
+
     elif log_id == (''):
         return render_template("new.html", error='ログインIDを入力してください。')
+
     elif passwd == (''):
         return render_template("new.html", error='パスワードを入力してください。')
+
     elif user_name == (''):
         return render_template("new.html", error='名前を入力してください。')
+
+    elif passwd <= 8:
+        return render_template("new.html", error='パスワードは8文字以上16文字以下です。')
+
+    elif passwd >= 16:
+        return render_template("new.html", error='パスワードは8文字以上16文字以下です。')
 
     else:
 
@@ -477,6 +611,8 @@ def edit_db():
     print(data)
     passwd = request.form["passwd"]
     print(passwd)
+    passwd_again = request.form["passwd_again"]
+    print(passwd_again)
     user_name = request.form["user_name"]
     print(user_name)
     user_intro = request.form["user_intro"]
@@ -506,18 +642,9 @@ def edit_db():
 
         return render_template('edit.html', pros=result, error=error)
 
+    elif len(passwd) <= 8 or len(passwd) >= 16:
 
-    if img_file and allowed_file(img_file.filename):
-
-        filename = secure_filename(img_file.filename)
-        img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-        path = UPLOAD_FOLDER + filename
-        print(path)
-
-    else:
-
-
-        path = './static/img/profile.png'
+        error = 'パスワードを8文字以上16文字以内で入力してください！！'
 
         data = request.cookies.get('name', None)
         print(data)
@@ -526,30 +653,101 @@ def edit_db():
         con = db.cursor()
         print('???')
 
-        sql = "update users set user_img = %s, passwd = '" + passwd + "', user_name = '" + user_name + "', user_intro = '" + user_intro + "' where log_id = '" + data + "' "
-        con.execute(sql, [path])
+        sql = 'select user_img, id, user_name, user_intro from users where log_id = "' + data + '" '
+        con.execute(sql)
         db.commit()
         print(sql)
 
         result = con.fetchall()
         print(result)
 
-        return redirect('http://localhost:8080/pro')
+        return render_template('edit.html', pros=result, error=error)
 
+    elif passwd != passwd_again:
 
-    db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
-    con = db.cursor()
-    print('???')
+        error = 'パスワードは両方とも同様の内容を入力してください！！'
 
-    sql = "update users set user_img = %s, passwd = '" + passwd + "', user_name = '" + user_name + "', user_intro = '" + user_intro + "' where log_id = '" + data + "' "
-    con.execute(sql, [path])
-    db.commit()
-    print(sql)
+        data = request.cookies.get('name', None)
+        print(data)
 
-    result = con.fetchall()
-    print(result)
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
 
-    return redirect('http://localhost:8080/pro')
+        sql = 'select user_img, id, user_name, user_intro from users where log_id = "' + data + '" '
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        return render_template('edit.html', pros=result, error=error)
+
+    elif user_name == (''):
+
+        error = '名前を入力してください！！'
+
+        data = request.cookies.get('name', None)
+        print(data)
+
+        db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+        con = db.cursor()
+        print('???')
+
+        sql = 'select user_img, id, user_name, user_intro from users where log_id = "' + data + '" '
+        con.execute(sql)
+        db.commit()
+        print(sql)
+
+        result = con.fetchall()
+        print(result)
+
+        return render_template('edit.html', pros=result, error=error)
+
+    else:
+
+        if img_file and allowed_file(img_file.filename):
+
+            filename = secure_filename(img_file.filename)
+            img_file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+            path = UPLOAD_FOLDER + filename
+            print(path)
+
+            db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+            con = db.cursor()
+            print('???')
+
+            sql = "update users set user_img = %s, passwd = '" + passwd + "', user_name = '" + user_name + "', user_intro = '" + user_intro + "' where log_id = '" + data + "' "
+            con.execute(sql, [path])
+            db.commit()
+            print(sql)
+
+            result = con.fetchall()
+            print(result)
+
+            return redirect('http://localhost:8080/pro')
+
+        else:
+
+            path = './static/img/profile.png'
+
+            data = request.cookies.get('name', None)
+            print(data)
+
+            db = MySQLdb.connect(user='root', passwd='asatai95', host='localhost', db='tukutter', charset='utf8')
+            con = db.cursor()
+            print('???')
+
+            sql = "update users set user_img = %s, passwd = '" + passwd + "', user_name = '" + user_name + "', user_intro = '" + user_intro + "' where log_id = '" + data + "' "
+            con.execute(sql, [path])
+            db.commit()
+            print(sql)
+
+            result = con.fetchall()
+            print(result)
+
+            return redirect('http://localhost:8080/pro')
 
 @application.route('/oki/<user_id>')
 def oki(user_id=None):
